@@ -1,0 +1,20 @@
+{
+  "name": "RokkinCatCodingChallenge",
+  "version": "1.0.0",
+  "description": "A browser-based web application that manages a recipe collection.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/empressPotato/RokkinCatCodingChallenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/empressPotato/RokkinCatCodingChallenge/issues"
+  },
+  "homepage": "https://github.com/empressPotato/RokkinCatCodingChallenge#readme"
+}
