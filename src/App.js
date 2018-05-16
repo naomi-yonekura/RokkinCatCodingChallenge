@@ -6,34 +6,37 @@ import React from 'react';
 // * Import and assets here
 
 // * Import any Compoenents here
+import LandingPage from './landingPage';
+import { MuiThemeProvider } from 'material-ui/styles';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+import { red600 } from 'material-ui/styles/colors';
+import { blue500 } from 'material-ui/styles/colors';
+
+
 
 // ? Import the "database" here?
 
 
+const theme = getMuiTheme({
+    palette: {
+        primary1Color: red600,
+        accent1Color: blue500,
+    }
+})
+
 export default class App extends React.Component {
     constructor() {
         super();
-        this.state = {
-            // * Variables here
-            count: 0,
-        };
-
-        // ? to bind any functions in App here?
+        this.state = { };
     }
-
 
     render() {
         return (
-            <section>
-                <h1>Naomi's Magnifacent Online Recipie Book!</h1>
-                <button onClick={() => {
-                    this.setState({ count: this.state.count + 1});
-                }}>Add Recipie {this.state.count}</button>
-
-            </section>
-
-
-
+            <MuiThemeProvider theme={theme}>
+                <LandingPage></LandingPage>
+            </MuiThemeProvider>
         );
     }
 
