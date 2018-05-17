@@ -11,46 +11,53 @@ export default class AddRecipie extends React.Component {
             description: '',
             name: '',
             amount: '',
-            ingrediants: [{ name: '', amount: '' }],
+            ingredients: [{ name: '', amount: '' }],
+            steps: '',
         };
     }
 
-    handleIngrNameChange(event, index) {
-        let ingrediants = [...this.state.ingrediants];
-        ingrediants[index] = event.value;
-        this.setState({ ingrediants });
+    changeTitle(event) {
+        this.setState({ title: event.value });
     }
 
-    handleIngrAmountChange(event, index) {
-        let ingrediants = [...this.state.ingrediants];
-        ingrediants[index] = event.value;
-        this.setState({ ingrediants });
+    changeDescription(event) {
+        this.setState({ description: event.value });
     }
 
-    handleIngrRemove(index) {
-        let ingrediants = [...this.state.values];
-        values.splice(i, 1);
-        this.setState({ values });
+    changeSteps(event) {
+        this.setState({ steps: event.value });
     }
 
-    handleIngrAdd() {
-        this.setState(prevState => ({ values: [...prevState.values, '']}))
-    }
-
-    getIngrediants() {
-        return this.state.ingrediants.map((ingr, index)=> {
-            <div>
-                <TextField 
-                    onChange={this.handleIngrNameChange(this, index)}
-                    floatingLabelText="Ingrediants #${index+1}" />
-                <TextField 
-                    onChange={this.handleIngrAmountChange(this, index)}
-                    floatingLabelText="Amount" />
-                <RaisedButton secondary={true} onClick={this.handleIngrRemove(index)}>-</RaisedButton>
-            </div>
+    changeIngredient(index, event) {
+        const newIngredients = this.state.ingredients.map((ingredient, newIndex) => {
+            if (index !== newIndex) return ingredient;
+            // Make the new input the value of the ingridient at that index
+            return { ingredient, name: event.value };
         });
-        <RaisedButton onClick={this.handleIngrAdd}>Add Ingrediant</RaisedButton>
+        this.setState({ ingredients: newIngredients });
+    }
 
+    changeAmount(index, event) {
+        const newAmount = this.state.ingredients.map((ingredient, newIndex) => {
+            if (index !== newIndex) return ingredient;
+            // Make the new amount the value of the ingridient at that index
+            return { ingredient, amount: event.value };
+        });
+        this.setState({ ingredients: newIngredients });
+    }
+
+    handleRemove(index) {
+        this.setState({
+            // Remove the value if it's index is the same as the pass in index
+            ingredients: this.state.ingredients.filter((ingredient, newIndex) => index !== newIndex)
+        });
+    }
+
+    handleAdd() {
+        this.setState({
+            // Concat returns a new array so React realizes something has changed because mutating does not guarentee that
+            ingredients: this.state.ingredients.concat([{ name: '', amount: ''}])
+        });
     }
 
 
@@ -58,27 +65,46 @@ export default class AddRecipie extends React.Component {
         return (
             <section>
                 <h1>Add Recipie</h1>
-                <TextField floatingLabelText="Title" />
-                <br /><TextField floatingLabelText="Description"
+                <TextField floatingLabelText="Title" onChange={this.changeTitle(this)} />
+
+                <br /><TextField floatingLabelText="Description" onChange={this.changeDescription(this)}
                     multiLine={true} rows={4} />
                 <br />
 
-                {this.getIngrediants()}
 
-                {/* {this.state.ingrediants.map((ingr, index) => {
+
+                // * "event" is the object it is called in so since a raisedbutton is submitting things idk if i can use it...
+                // * use "index" instead
+
+                {this.state.ingredients.map((ingredient, index) => (
                     <div>
-                        <TextField 
-                            onChange={this.handleIngrNameChange(this, index)}
-                            floatingLabelText="Ingrediants #${index+1}" />
-                        <TextField 
-                            onChange={this.handleIngrAmountChange(this, index)}
-                            floatingLabelText="Amount" />
-                        <RaisedButton secondary={true} onClick={this.handleIngrRemove(index)}>-</RaisedButton>
-                    </div>
-                })}
+                        <TextField
+                            floatingLabelText="Ingredient #${index+1}"
+                            value={ingredients.name}
+                            onChange={this.changeIngredient(index, this)} />
 
-                <RaisedButton onClick={this.handleIngrAdd}>Add Ingrediant</RaisedButton> */}
-                {/* <RaisedButton onClick={}></RaisedButton> */}
+                        <TextField
+                            floatingLabelText="Amount"
+                            value={ingredient.amount}
+                            onChange={this.changeAmount(index, this)} />
+
+
+                        <RaisedButton onClick={this.handleRemove(index)}>-</RaisedButton>
+
+                    </div>
+                ))}
+
+                <RaisedButton onClick={this.handleAdd}>Add Ingredient</RaisedButton>
+
+
+
+
+                <TextField floatingLabelText="Steps"
+                    multiLine={true} rows={4}
+                    onChange={this.changeSteps(this)} />
+
+
+                <RaisedButton onClick={this.submit()}>Add Recipie</RaisedButton>
 
 
 
