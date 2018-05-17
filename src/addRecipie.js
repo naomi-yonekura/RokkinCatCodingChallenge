@@ -1,6 +1,8 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import Remove from 'material-ui/svg-icons/content/remove';
 
 
 export default class AddRecipie extends React.Component {
@@ -65,43 +67,43 @@ export default class AddRecipie extends React.Component {
         return (
             <section>
                 <h1>Add Recipie</h1>
-                <TextField floatingLabelText="Title" onChange={this.changeTitle(this)} />
+                <TextField floatingLabelText="Title" onChange={() => this.changeTitle(this)} />
 
-                <br /><TextField floatingLabelText="Description" onChange={this.changeDescription(this)}
+                <br /><TextField floatingLabelText="Description" onChange={() => this.changeDescription(this)}
                     multiLine={true} rows={4} />
                 <br />
 
 
 
-                // * "event" is the object it is called in so since a raisedbutton is submitting things idk if i can use it...
-                // * use "index" instead
-
                 {this.state.ingredients.map((ingredient, index) => (
                     <div>
-                        <TextField
-                            floatingLabelText="Ingredient #${index+1}"
+                        <TextField key={`I${index}`}
+                            floatingLabelText="Ingredient"
                             value={ingredient.name}
-                            onChange={this.changeIngredient(index, this)} />
+                            onChange={() => this.changeIngredient(index, this)} />
 
-                        <TextField
+                        <TextField key={`A${index}`}
                             floatingLabelText="Amount"
                             value={ingredient.amount}
-                            onChange={this.changeAmount(index, this)} />
+                            onChange={() => this.changeAmount(index, this)} />
 
 
-                        <RaisedButton onClick={this.handleRemove(index)}>-</RaisedButton>
+                        <FloatingActionButton secondary={true} onClick={() => this.handleRemove(index)}>
+                            <Remove />
+                        </FloatingActionButton>
+                        {/* <RaisedButton secondary={true} onClick={() => this.handleRemove(index)}>-</RaisedButton> */}
 
                     </div>
                 ))}
 
-                <RaisedButton onClick={this.handleAdd}>Add Ingredient</RaisedButton>
+                <RaisedButton primary={true} onClick={() => this.handleAdd()}>Add Ingredient</RaisedButton>
 
 
 
 
                 <TextField floatingLabelText="Steps"
                     multiLine={true} rows={4}
-                    onChange={this.changeSteps(this)} />
+                    onChange={() => this.changeSteps(this)} />
 
 
                 {/* <RaisedButton onClick={this.submit()}>Add Recipie</RaisedButton> */}
