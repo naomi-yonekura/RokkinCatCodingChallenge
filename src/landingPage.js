@@ -5,6 +5,7 @@ import React from 'react';
 // * Import any Compoenents here
 import AddRecipie from './addRecipie';
 import RecipieTable from './recipieTable';
+import ShowRecipie from './showRecipie';
 import { MuiThemeProvider } from 'material-ui/styles';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -19,7 +20,18 @@ import {
 
 // ? Import the "database" here?
 
+let recipie = {
+    title: "Rice",
+    description: "White rice",
+    ingrediants: [
+        { ingrediant: "Rice", amount: "1 cup" },
+        { ingrediant: "Water", amount: "2 cups" },
+    ],
+    steps: ["Boil water in a pot", "Pour Rice into water", "Wait until water and rice start to boil", "Cover the pot and reduce the heat", "Wait 20 minutes"],
+}
 
+// TODO get the recipies and populate here
+let allRecipies = ["hi", "hello", "goodbye"];
 
 export default class LandingPage extends React.Component {
     constructor(props) {
@@ -27,6 +39,8 @@ export default class LandingPage extends React.Component {
         this.state = {
             // * Variables here
             // palette: props.muiTheme.palette,
+            recipie: recipie,
+            allRecpies: allRecipies,
             count: 0,
         };
 
@@ -38,14 +52,14 @@ export default class LandingPage extends React.Component {
         return (
             // TODO put in a table that shows recipies in reverse cronological order here
             <section>
-                <h1>Naomi's Magnifacent Online Recipie Book!</h1>
-                <RaisedButton onClick={() => {
+                <h1>Naomi's Amazing Online Recipie Book!</h1>
+                <RaisedButton primary={true} onClick={() => {
                     this.setState({ count: this.state.count + 1 });
-                }} 
-                // style={{color: palette.primary1Color}}
+                }}
                 >Add Recipie {this.state.count}</RaisedButton>
-                <RecipieTable></RecipieTable>
+                <RecipieTable recipies={this.state.allRecpies}></RecipieTable>
                 <AddRecipie></AddRecipie>
+                <ShowRecipie recipie={this.state.recipie}></ShowRecipie>
             </section>
         );
     }

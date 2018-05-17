@@ -34,7 +34,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <MuiThemeProvider theme={theme}>
+            <MuiThemeProvider muiTheme={theme}>
                 <LandingPage></LandingPage>
             </MuiThemeProvider>
         );

@@ -9,15 +9,13 @@ import {
 } from 'material-ui/Table';
 import RenderToLayer from 'material-ui/internal/RenderToLayer';
 
-// TODO get the recipies and populate here
-let recipies = ["hi", "hello", "goodbye"];
 
 export default class RecipieTable extends Component {
 
     render() {
         return (
             <section>
-                <h1>table</h1>
+                <h1>All Recipies</h1>
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -26,7 +24,7 @@ export default class RecipieTable extends Component {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {recipies.map(function (name, index) {
+                        {this.props.recipies.map(function (name, index) {
                             return <TableRow key={index}><TableRowColumn>{name}</TableRowColumn></TableRow>
                         })}
                     </TableBody>
