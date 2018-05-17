@@ -43,7 +43,7 @@ export default class AddRecipie extends React.Component {
             // Make the new amount the value of the ingridient at that index
             return { ingredient, amount: event.value };
         });
-        this.setState({ ingredients: newIngredients });
+        this.setState({ ingredients: newAmount });
     }
 
     handleRemove(index) {
@@ -80,7 +80,7 @@ export default class AddRecipie extends React.Component {
                     <div>
                         <TextField
                             floatingLabelText="Ingredient #${index+1}"
-                            value={ingredients.name}
+                            value={ingredient.name}
                             onChange={this.changeIngredient(index, this)} />
 
                         <TextField
@@ -104,7 +104,7 @@ export default class AddRecipie extends React.Component {
                     onChange={this.changeSteps(this)} />
 
 
-                <RaisedButton onClick={this.submit()}>Add Recipie</RaisedButton>
+                {/* <RaisedButton onClick={this.submit()}>Add Recipie</RaisedButton> */}
 
 
 
