@@ -19,17 +19,15 @@ export default class RecipieTable extends React.Component {
         let names = [];
         let recipies = [];
         if (allKeys !== null && allKeys !== undefined) {
-            // let keys = localStorage.getItem('keys');
-            let keys = allKeys;
-            keys = keys.replace("[", "");
-            keys = keys.replace("]", "");
-            keys = keys.split(',');
+            allKeys = allKeys.replace("[", "");
+            allKeys = allKeys.replace("]", "");
+            allKeys = allKeys.split(',');
 
-            for (var k in keys) {
-                let temp = JSON.parse(localStorage.getItem(k));
+            for (var k in allKeys) {
+                let temp = JSON.parse(localStorage.getItem(allKeys[k]));
                 if (temp === null) {
-                    console.log('temp is null? heres the key: ', k);
-                    console.log('here is the recipie?: ', localStorage.getItem(k));
+                    console.log('temp is null? heres the key: ', allKeys[k]);
+                    console.log('here is the recipie?: ', localStorage.getItem(allKeys[k]));
                 } else {
                     recipies.push(temp.title);
                 }
