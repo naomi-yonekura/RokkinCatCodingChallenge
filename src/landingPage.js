@@ -16,7 +16,7 @@ import {
     TableHeaderColumn,
     TableRow,
     TableRowColumn,
-  } from 'material-ui/Table';
+} from 'material-ui/Table';
 
 // ? Import the "database" here?
 
@@ -38,15 +38,41 @@ export default class LandingPage extends React.Component {
         super(props);
         this.state = {
             // * Variables here
-            // palette: props.muiTheme.palette,
             recipie: recipie,
             allRecpies: allRecipies,
             count: 0,
+            allKeys: null,
         };
 
         // ? to bind any functions in App here?
     }
 
+    newRecipie(recipie) {
+        // TODO fill in, save to local storage
+        let title = recipie.title;
+
+        let keys = localStorage.getItem('keys');
+        if (keys === null) {
+            keys = [];
+        } else {
+            keys = keys.replace("[", "");
+            keys = keys.replace("]", "");
+            keys = keys.split(',');
+        }
+        for(var k in keys) {
+            if(k === title) {
+                title = title + "1";
+            }
+        }
+        keys.push(title);
+
+        localStorage.setItem("" + title, JSON.stringify(recipie));
+        localStorage.setItem('keys', keys);
+        this.setState({
+            allKeys: keys,
+        });
+
+    }
 
     render() {
         return (
@@ -57,8 +83,9 @@ export default class LandingPage extends React.Component {
                     this.setState({ count: this.state.count + 1 });
                 }}
                 >Add Recipie {this.state.count}</RaisedButton>
-                <RecipieTable recipies={this.state.allRecpies}></RecipieTable>
-                <AddRecipie></AddRecipie>
+                <RecipieTable allRecipies={this.state.allKeys}></RecipieTable>
+
+                <AddRecipie newRecipie={this.newRecipie}></AddRecipie>
                 <ShowRecipie recipie={this.state.recipie}></ShowRecipie>
             </section>
         );

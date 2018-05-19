@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Remove from 'material-ui/svg-icons/content/remove';
+import Snackbar from 'material-ui/Snackbar';
 
 
 export default class AddRecipie extends React.Component {
@@ -15,19 +16,20 @@ export default class AddRecipie extends React.Component {
             amount: '',
             ingredients: [{ name: '', amount: '' }],
             steps: '',
+            open: false,
         };
     }
 
-    changeTitle(event) {
-        this.setState({ title: event.value });
+    changeTitle(newValue) {
+        this.setState({ title: newValue });
     }
 
-    changeDescription(event) {
-        this.setState({ description: event.value });
+    changeDescription(newValue) {
+        this.setState({ description: newValue });
     }
 
-    changeSteps(event) {
-        this.setState({ steps: event.value });
+    changeSteps(newValue) {
+        this.setState({ steps: newValue });
     }
 
     changeIngredient(index, newValue) {
@@ -61,22 +63,40 @@ export default class AddRecipie extends React.Component {
     handleAdd() {
         this.setState({
             // Concat returns a new array so React realizes something has changed because mutating does not guarentee that
-            ingredients: this.state.ingredients.concat([{ name: '', amount: ''}])
+            ingredients: this.state.ingredients.concat([{ name: '', amount: '' }])
         });
     }
 
+    submit() {
+        if (this.state.title !== "") {
+            let recipie = {
+                title: this.state.title,
+                description: this.state.description,
+                ingredients: this.state.ingredients,
+                steps: this.state.steps,
+            };
+
+            const { newRecipie } = this.props;
+            newRecipie(recipie);
+        } else {
+            this.setState({
+                open: true,
+            });
+        }
+
+
+    }
 
     render() {
         return (
             <section>
                 <h1>Add Recipie</h1>
-                <TextField floatingLabelText="Title" onChange={() => this.changeTitle(this)} />
+                <TextField floatingLabelText="Title"
+                    onChange={(event, newValue) => this.changeTitle(newValue)} />
 
-                <br /><TextField floatingLabelText="Description" onChange={() => this.changeDescription(this)}
+                <br /><TextField floatingLabelText="Description" onChange={(event, newValue) => this.changeDescription(newValue)}
                     multiLine={true} rows={4} />
                 <br />
-
-
 
                 {this.state.ingredients.map((ingredient, index) => (
                     <div key={index}>
@@ -100,18 +120,16 @@ export default class AddRecipie extends React.Component {
 
                 <RaisedButton primary={true} onClick={() => this.handleAdd()}>Add Ingredient</RaisedButton>
 
-
-
-
                 <TextField floatingLabelText="Steps"
                     multiLine={true} rows={4}
-                    onChange={() => this.changeSteps(this)} />
+                    onChange={(event, newValue) => this.changeSteps(newValue)} />
 
-
-                {/* <RaisedButton onClick={this.submit()}>Add Recipie</RaisedButton> */}
-
-
-
+                <RaisedButton onClick={() => this.submit()}>Add Recipie</RaisedButton>
+                <Snackbar
+                    open={this.state.open}
+                    message="Please enter a title"
+                    autoHideDuration={2000}
+                />
             </section>
 
         );
