@@ -20,14 +20,13 @@ import {
 
 // ? Import the "database" here?
 
-let recipie = {
-    title: "Rice",
-    description: "White rice",
+let emptyRecipie = {
+    title: "",
+    description: "",
     ingrediants: [
-        { ingrediant: "Rice", amount: "1 cup" },
-        { ingrediant: "Water", amount: "2 cups" },
+        { ingrediant: "", amount: "" },
     ],
-    steps: ["Boil water in a pot", "Pour Rice into water", "Wait until water and rice start to boil", "Cover the pot and reduce the heat", "Wait 20 minutes"],
+    steps: [""],
 }
 
 // TODO get the recipies and populate here
@@ -38,8 +37,8 @@ export default class LandingPage extends React.Component {
         super(props);
         this.state = {
             // * Variables here
-            recipie: recipie,
             // currentRecipie: currentRecipie,
+            selectedRecipie: emptyRecipie,
             allRecpies: allRecipies,
             count: 0,
             allKeys: [],
@@ -114,13 +113,9 @@ export default class LandingPage extends React.Component {
             // This is putting the recipies in reverse cronological order
             reveresdRecipies.push(recipies.pop());
         }
-
+        // ! Change the selectedRecipie to just calling/rendering the showRecipie component and just pass it in?
         let selectedRecipie = reveresdRecipies[rowNumber];
-
-
-        console.log('choosenRecipie: ', selectedRecipie);
-        console.log('rownubmer: ', rowNumber);
-
+        this.setState({ selectedRecipie: selectedRecipie });
     }
 
 
@@ -140,8 +135,7 @@ export default class LandingPage extends React.Component {
 
                 <AddRecipie newRecipie={this.newRecipie}></AddRecipie>
                 <ShowRecipie
-                    // currentRecipie={this.state.currentRecipie}
-                    recipie={this.state.recipie}
+                    selectedRecipie={this.state.selectedRecipie}
                     editRecipie={this.editRecipie}
                     deleteRecipie={this.deleteRecipie}
                 ></ShowRecipie>
