@@ -41,10 +41,11 @@ export default class LandingPage extends React.Component {
             recipie: recipie,
             allRecpies: allRecipies,
             count: 0,
-            allKeys: null,
+            allKeys: [],
         };
 
         // ? to bind any functions in App here?
+        this.newRecipie = this.newRecipie.bind(this);
     }
 
     newRecipie(recipie) {
@@ -68,11 +69,18 @@ export default class LandingPage extends React.Component {
 
         localStorage.setItem("" + title, JSON.stringify(recipie));
         localStorage.setItem('keys', keys);
-        this.setState({
-            allKeys: keys,
-        });
+        // this.setState((prevState, props) => {
+        //     return {allKeys: keys};
+        // });
+        this.changeKeys(keys);
 
     }
+
+    changeKeys(keys) {
+        this.setState({ allKeys: keys });
+    }
+
+
 
     render() {
         return (

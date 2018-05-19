@@ -13,7 +13,8 @@ import RenderToLayer from 'material-ui/internal/RenderToLayer';
 export default class RecipieTable extends React.Component {
 
     render() {
-        const { allKeys } = this.props;
+        // const { allKeys } = this.props;
+        let allKeys = localStorage.getItem('keys');
         console.log('all keys: ', allKeys);
         let names = [];
         let recipies = [];
