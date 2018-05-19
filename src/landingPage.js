@@ -10,6 +10,8 @@ import ShowRecipie from './showRecipie';
 import { MuiThemeProvider } from 'material-ui/styles';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+
 import {
     Table,
     TableBody,
@@ -59,7 +61,8 @@ export default class LandingPage extends React.Component {
         } else {
             keys = keys.replace("[", "");
             keys = keys.replace("]", "");
-            keys = keys.split(',');        }
+            keys = keys.split(',');
+        }
         for (var k in keys) {
             if (k === title) {
                 title = title + "1";
@@ -95,9 +98,9 @@ export default class LandingPage extends React.Component {
         keys = keys.replace("[", "");
         keys = keys.replace("]", "");
         keys = keys.split(',');
-        
-        let reveresdRecipies=[];
-        let recipies=[];
+
+        let reveresdRecipies = [];
+        let recipies = [];
 
         for (var k in keys) {
             let temp = JSON.parse(localStorage.getItem(keys[k]));
@@ -124,25 +127,67 @@ export default class LandingPage extends React.Component {
         return (
             <section>
                 <h1>Naomi's Amazing Online Recipe Book!</h1>
-                <RaisedButton primary={true} onClick={() => {
-                    localStorage.clear();
-                }}
-                >Clear Local Storage</RaisedButton>
-                <RecipieTable 
-                    allRecipies={this.state.allKeys}
-                    choosenRecipie={this.choosenRecipie}
-                ></RecipieTable>
 
-                <AddRecipie newRecipie={this.newRecipie}></AddRecipie>
-                <EditRecipie 
-                    editingRecipie={this.state.editingRecipie}
-                    saveEditedRecipie={this.saveEditedRecipie}
-                ></EditRecipie>
-                <ShowRecipie
-                    selectedRecipie={this.state.selectedRecipie}
-                    editRecipie={this.editRecipie}
-                    deleteRecipie={this.deleteRecipie}
-                ></ShowRecipie>
+                <Router>
+                    <section>
+
+                        <Link to='/' >
+                            <RaisedButton label="Home" primary={true} />
+                        </Link>
+                        <Link to='/addRecipe'>
+                            <RaisedButton label="Add Recipe" primary={true} />
+                        </Link>
+                        <Link to='/editRecipe'>
+                            <RaisedButton label="Edit Recipe" primary={true} />
+                        </Link>
+                        <Link to='/showRecipe'>
+                            <RaisedButton label="Show Recipe" primary={true} />
+                        </Link>
+
+
+                        <Switch>
+                            <Route exact={true} path="/" render={() => {
+                                return (
+                                    <section>
+                                        <h1>Home Page</h1>
+                                        <RecipieTable
+                                            allRecipies={this.state.allKeys}
+                                            choosenRecipie={this.choosenRecipie}
+                                        ></RecipieTable>
+                                    </section>
+                                );
+                            }} />
+
+                            <Route path="/addRecipe" render={() => {
+                                return (
+
+                                    <AddRecipie newRecipie={this.newRecipie}></AddRecipie>
+
+                                );
+                            }} />
+
+                            <Route path="/editRecipe" render={() => {
+                                return (
+                                    <EditRecipie
+                                        editingRecipie={this.state.editingRecipie}
+                                        saveEditedRecipie={this.saveEditedRecipie}
+                                    ></EditRecipie>
+                                );
+                            }} />
+
+                            <Route path="/showRecipe" render={() => {
+                                return (
+                                    <ShowRecipie
+                                        selectedRecipie={this.state.selectedRecipie}
+                                        editRecipie={this.editRecipie}
+                                        deleteRecipie={this.deleteRecipie}
+                                    ></ShowRecipie>
+                                );
+                            }} />
+                        </Switch>
+                    </section>
+                </Router>
+
             </section>
         );
     }

@@ -12,6 +12,10 @@ export default class AddRecipie extends React.Component {
         this.state = {
             title: '',
             key: '',
+            prepTime: '',
+            foodType: '',
+            difficulty: '',
+            amountFeed: '',
             description: '',
             ingredients: [{ name: '', amount: '' }],
             steps: '',
@@ -25,6 +29,22 @@ export default class AddRecipie extends React.Component {
 
     changeDescription(newValue) {
         this.setState({ description: newValue });
+    }
+
+    changePrepTime(newValue) {
+        this.setState({ prepTime: newValue });
+    }
+
+    changeFoodType(newValue) {
+        this.setState({ foodType: newValue });
+    }
+
+    changeDifficulty(newValue) {
+        this.setState({ difficulty: newValue });
+    }
+
+    changeAmountFeed(newValue) {
+        this.setState({ amountFeed: newValue });
     }
 
     changeSteps(newValue) {
@@ -71,6 +91,10 @@ export default class AddRecipie extends React.Component {
             let recipie = {
                 title: this.state.title,
                 key: this.state.title,
+                prepTime: this.state.prepTime,
+                foodType: this.state.foodType,
+                difficulty: this.state.difficulty,
+                amountFeed: this.state.amountFeed,
                 description: this.state.description,
                 ingredients: this.state.ingredients,
                 steps: this.state.steps,
@@ -96,7 +120,11 @@ export default class AddRecipie extends React.Component {
 
                 <br /><TextField floatingLabelText="Description" onChange={(event, newValue) => this.changeDescription(newValue)}
                     multiLine={true} rows={4} />
-                <br />
+
+                <br /><TextField floatingLabelText="Prep Time" onChange={(event, newValue) => this.changePrepTime(newValue)} />
+                <br /><TextField floatingLabelText="Type of Food" onChange={(event, newValue) => this.changeFoodType(newValue)} />
+                <br /><TextField floatingLabelText="Difficulty" onChange={(event, newValue) => this.changeDifficulty(newValue)} />
+                <br /><TextField floatingLabelText="Amount of People Feed" onChange={(event, newValue) => this.changeAmountFeed(newValue)} />
 
                 {this.state.ingredients.map((ingredient, index) => (
                     <div key={index}>
