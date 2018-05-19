@@ -39,6 +39,7 @@ export default class LandingPage extends React.Component {
         this.state = {
             // * Variables here
             recipie: recipie,
+            // currentRecipie: currentRecipie,
             allRecpies: allRecipies,
             count: 0,
             allKeys: [],
@@ -58,10 +59,9 @@ export default class LandingPage extends React.Component {
         } else {
             keys = keys.replace("[", "");
             keys = keys.replace("]", "");
-            keys = keys.split(',');
-        }
-        for(var k in keys) {
-            if(k === title) {
+            keys = keys.split(',');        }
+        for (var k in keys) {
+            if (k === title) {
                 title = title + "1";
             }
         }
@@ -69,38 +69,85 @@ export default class LandingPage extends React.Component {
 
         localStorage.setItem("" + title, JSON.stringify(recipie));
         localStorage.setItem('keys', keys);
-        // this.setState((prevState, props) => {
-        //     return {allKeys: keys};
-        // });
-        this.changeKeys(keys);
-
-    }
-
-    changeKeys(keys) {
         this.setState({ allKeys: keys });
+
     }
 
+
+    editRecipie(recipie) {
+
+    }
+
+    deleteRecipie(recipie) {
+        let keys = localStorage.getItem('keys');
+        keys = keys.replace("[", "");
+        keys = keys.replace("]", "");
+        keys = keys.split(',');
+        recipie = localStorage.getItem(keys[1]);
+        console.log('recipie: ', recipie);
+
+
+        console.log('Before splice: ', keys);
+        console.log('splicing: ', recipie.title);
+        keys.splice(keys.indexOf(recipie.title), 1);
+        console.log('After splice: ', keys);
+        // localStorage.removeItem(recipie.title);
+    }
+
+    choosenRecipie(rowNumber) {
+        let keys = localStorage.getItem('keys');
+        keys = keys.replace("[", "");
+        keys = keys.replace("]", "");
+        keys = keys.split(',');
+        
+        let reveresdRecipies=[];
+        let recipies=[];
+
+        for (var k in keys) {
+            let temp = JSON.parse(localStorage.getItem(keys[k]));
+            if (temp !== null) {
+                recipies.push(temp);
+            }
+        }
+        // TODO possibley remove this an instead take the minus the length by the index to find the cronological index instead of the reverse one we got
+        for (let i = 0; i < recipies.length; i) {
+            // This is putting the recipies in reverse cronological order
+            reveresdRecipies.push(recipies.pop());
+        }
+
+        let selectedRecipie = reveresdRecipies[rowNumber];
+
+
+        console.log('choosenRecipie: ', selectedRecipie);
+        console.log('rownubmer: ', rowNumber);
+
+    }
 
 
     render() {
         return (
             // TODO put in a table that shows recipies in reverse cronological order here
             <section>
-                <h1>Naomi's Amazing Online Recipie Book!</h1>
+                <h1>Naomi's Amazing Online Recipe Book!</h1>
                 <RaisedButton primary={true} onClick={() => {
-                    this.setState({ count: this.state.count + 1 });
+                    localStorage.clear();
                 }}
-                >Add Recipie {this.state.count}</RaisedButton>
-                <RecipieTable allRecipies={this.state.allKeys}></RecipieTable>
+                >Clear Local Storage</RaisedButton>
+                <RecipieTable 
+                    allRecipies={this.state.allKeys}
+                    choosenRecipie={this.choosenRecipie}
+                ></RecipieTable>
 
                 <AddRecipie newRecipie={this.newRecipie}></AddRecipie>
-                <ShowRecipie recipie={this.state.recipie}></ShowRecipie>
+                <ShowRecipie
+                    // currentRecipie={this.state.currentRecipie}
+                    recipie={this.state.recipie}
+                    editRecipie={this.editRecipie}
+                    deleteRecipie={this.deleteRecipie}
+                ></ShowRecipie>
             </section>
         );
     }
-
-
-
 
 
 }

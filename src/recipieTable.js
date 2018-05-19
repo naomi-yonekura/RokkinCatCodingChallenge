@@ -13,9 +13,8 @@ import RenderToLayer from 'material-ui/internal/RenderToLayer';
 export default class RecipieTable extends React.Component {
 
     render() {
-        // const { allKeys } = this.props;
+        const { choosenRecipie } = this.props;
         let allKeys = localStorage.getItem('keys');
-        console.log('all keys: ', allKeys);
         let names = [];
         let recipies = [];
         if (allKeys !== null && allKeys !== undefined) {
@@ -25,25 +24,22 @@ export default class RecipieTable extends React.Component {
 
             for (var k in allKeys) {
                 let temp = JSON.parse(localStorage.getItem(allKeys[k]));
-                if (temp === null) {
-                    console.log('temp is null? heres the key: ', allKeys[k]);
-                    console.log('here is the recipie?: ', localStorage.getItem(allKeys[k]));
-                } else {
+                if (temp !== null) {
                     recipies.push(temp.title);
                 }
             }
-            for(let i = 0; i < recipies.length; i) {
+            for (let i = 0; i < recipies.length; i) {
                 // This is putting the recipies in reverse cronological order
                 names.push(recipies.pop());
             }
         } else {
-            names.push('No recipies');
+            names.push('No recipes');
         }
 
         return (
             <section>
                 <h1>All Recipies</h1>
-                <Table>
+                <Table onCellClick={(rowNumber, columnId) => choosenRecipie(rowNumber)}>
                     <TableHeader>
                         <TableRow>
                             <TableHeaderColumn>Title</TableHeaderColumn>

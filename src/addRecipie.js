@@ -90,7 +90,7 @@ export default class AddRecipie extends React.Component {
     render() {
         return (
             <section>
-                <h1>Add Recipie</h1>
+                <h1>Add Recipe</h1>
                 <TextField floatingLabelText="Title"
                     onChange={(event, newValue) => this.changeTitle(newValue)} />
 
@@ -124,7 +124,7 @@ export default class AddRecipie extends React.Component {
                     multiLine={true} rows={4}
                     onChange={(event, newValue) => this.changeSteps(newValue)} />
 
-                <RaisedButton onClick={() => this.submit()}>Add Recipie</RaisedButton>
+                <RaisedButton onClick={() => this.submit()}>Add Recipe</RaisedButton>
                 <Snackbar
                     open={this.state.open}
                     message="Please enter a title"
