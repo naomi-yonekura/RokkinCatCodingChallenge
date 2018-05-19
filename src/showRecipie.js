@@ -22,13 +22,29 @@ export default class ShowRecipie extends React.Component {
         const { editRecipie } = this.props;
         const { deleteRecipie } = this.props;
         const { selectedRecipie } = this.props;
+
+        let arraySteps = selectedRecipie.steps.split("\n");
+        let descriptionArray = selectedRecipie.description.split("\n");
+        if (arraySteps === undefined || arraySteps === null) {
+            arraySteps = ["No steps"];
+        }
+        if (descriptionArray === undefined || descriptionArray === null) {
+            descriptionArray = ["No description"];
+        }
         return (
             <section className="show-grid">
                 <h2>Showing Recipes</h2>
 
                 <h3>Title: {selectedRecipie.title}</h3>
 
-                <h3>Description: {selectedRecipie.description}</h3>
+                <h3>Description: </h3>
+
+                {descriptionArray.map(function(detail, index) {
+                    return <p key={index}>
+                        {detail}
+                    </p>
+                })}
+                
 
                 <FloatingActionButton style={style} onClick={() => editRecipie(selectedRecipie)}>
                     <Edit />
@@ -49,29 +65,27 @@ export default class ShowRecipie extends React.Component {
 
                     </TableHeader>
                     <TableBody displayRowCheckbox={false}>
-                        {selectedRecipie.ingrediants.map(function (name, index) {
+                        {selectedRecipie.ingredients.map(function (single, index) {
                             return <TableRow key={index}>
-                                <TableRowColumn>{name.ingrediant}</TableRowColumn>
-                                <TableRowColumn>{name.amount}</TableRowColumn>
+                                <TableRowColumn>{single.name}</TableRowColumn>
+                                <TableRowColumn>{single.amount}</TableRowColumn>
 
                             </TableRow>
                         })}
                     </TableBody>
                 </Table>
 
-                <Table>
-                    <TableHeader displaySelectAll={false}>
-                        <TableRow>
-                            <TableHeaderColumn>Steps</TableHeaderColumn>
-                        </TableRow>
+                <h4>Steps: </h4>
 
-                    </TableHeader>
-                    <TableBody displayRowCheckbox={false}>
-                        {selectedRecipie.steps.map(function (name, index) {
-                            return <TableRow key={index}><TableRowColumn>{name}</TableRowColumn></TableRow>
-                        })}
-                    </TableBody>
-                </Table>
+                <div>
+                    {arraySteps.map(function (step, index) {
+                        return <li key={index}>
+                            {step}
+                        </li>
+                    })}
+                </div>
+
+
             </section>
         );
     }

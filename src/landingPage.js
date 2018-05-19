@@ -5,6 +5,7 @@ import React from 'react';
 // * Import any Compoenents here
 import AddRecipie from './addRecipie';
 import RecipieTable from './recipieTable';
+import EditRecipie from './editRecipie';
 import ShowRecipie from './showRecipie';
 import { MuiThemeProvider } from 'material-ui/styles';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -21,36 +22,36 @@ import {
 // ? Import the "database" here?
 
 let emptyRecipie = {
-    title: "",
-    description: "",
-    ingrediants: [
-        { ingrediant: "", amount: "" },
+    title: '',
+    key: '',
+    description: '',
+    ingredients: [
+        { name: '', amount: '' },
     ],
-    steps: [""],
+    steps: '',
 }
 
-// TODO get the recipies and populate here
-let allRecipies = ["hi", "hello", "goodbye"];
 
 export default class LandingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             // * Variables here
-            // currentRecipie: currentRecipie,
+            editingRecipie: emptyRecipie,
             selectedRecipie: emptyRecipie,
-            allRecpies: allRecipies,
             count: 0,
             allKeys: [],
         };
 
         // ? to bind any functions in App here?
         this.newRecipie = this.newRecipie.bind(this);
+        this.choosenRecipie = this.choosenRecipie.bind(this);
+        this.editRecipie = this.editRecipie.bind(this);
     }
 
     newRecipie(recipie) {
         // TODO fill in, save to local storage
-        let title = recipie.title;
+        let title = recipie.key;
 
         let keys = localStorage.getItem('keys');
         if (keys === null) {
@@ -72,9 +73,10 @@ export default class LandingPage extends React.Component {
 
     }
 
-
     editRecipie(recipie) {
-
+        this.setState({
+            editingRecipie: recipie,
+        })
     }
 
     deleteRecipie(recipie) {
@@ -82,15 +84,10 @@ export default class LandingPage extends React.Component {
         keys = keys.replace("[", "");
         keys = keys.replace("]", "");
         keys = keys.split(',');
-        recipie = localStorage.getItem(keys[1]);
-        console.log('recipie: ', recipie);
 
-
-        console.log('Before splice: ', keys);
-        console.log('splicing: ', recipie.title);
         keys.splice(keys.indexOf(recipie.title), 1);
-        console.log('After splice: ', keys);
-        // localStorage.removeItem(recipie.title);
+        localStorage.removeItem(recipie.title);
+        localStorage.setItem('keys', keys);
     }
 
     choosenRecipie(rowNumber) {
@@ -108,20 +105,23 @@ export default class LandingPage extends React.Component {
                 recipies.push(temp);
             }
         }
-        // TODO possibley remove this an instead take the minus the length by the index to find the cronological index instead of the reverse one we got
         for (let i = 0; i < recipies.length; i) {
             // This is putting the recipies in reverse cronological order
             reveresdRecipies.push(recipies.pop());
         }
-        // ! Change the selectedRecipie to just calling/rendering the showRecipie component and just pass it in?
         let selectedRecipie = reveresdRecipies[rowNumber];
         this.setState({ selectedRecipie: selectedRecipie });
+    }
+
+    saveEditedRecipie(recipie) {
+        console.log('saving edited reicpie: ', recipie);
+        localStorage.removeItem(recipie.key);
+        localStorage.setItem("" + recipie.key, JSON.stringify(recipie));
     }
 
 
     render() {
         return (
-            // TODO put in a table that shows recipies in reverse cronological order here
             <section>
                 <h1>Naomi's Amazing Online Recipe Book!</h1>
                 <RaisedButton primary={true} onClick={() => {
@@ -134,6 +134,10 @@ export default class LandingPage extends React.Component {
                 ></RecipieTable>
 
                 <AddRecipie newRecipie={this.newRecipie}></AddRecipie>
+                <EditRecipie 
+                    editingRecipie={this.state.editingRecipie}
+                    saveEditedRecipie={this.saveEditedRecipie}
+                ></EditRecipie>
                 <ShowRecipie
                     selectedRecipie={this.state.selectedRecipie}
                     editRecipie={this.editRecipie}

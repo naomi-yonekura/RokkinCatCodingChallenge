@@ -15,10 +15,6 @@ import { red600 } from 'material-ui/styles/colors';
 import { blue500 } from 'material-ui/styles/colors';
 
 
-
-// ? Import the "database" here?
-
-
 const theme = getMuiTheme({
     palette: {
         primary1Color: red600,

@@ -5,16 +5,25 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Remove from 'material-ui/svg-icons/content/remove';
 import Snackbar from 'material-ui/Snackbar';
 
+import {
+    Table,
+    TableBody,
+    TableHeader,
+    TableHeaderColumn,
+    TableRow,
+    TableRowColumn,
+} from 'material-ui/Table';
 
-export default class AddRecipie extends React.Component {
+
+export default class EditRecipie extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
-            key: '',
-            description: '',
-            ingredients: [{ name: '', amount: '' }],
-            steps: '',
+            title: this.props.editingRecipie.title,
+            key: this.props.editingRecipie.key,
+            description: this.props.editingRecipie.description,
+            ingredients: this.props.editingRecipie.ingredients,
+            steps: this.props.editingRecipie.steps,
             open: false,
         };
     }
@@ -67,17 +76,17 @@ export default class AddRecipie extends React.Component {
     }
 
     submit() {
+        // TODO change submit function 
         if (this.state.title !== "") {
             let recipie = {
                 title: this.state.title,
-                key: this.state.title,
+                key: this.state.key,
                 description: this.state.description,
                 ingredients: this.state.ingredients,
                 steps: this.state.steps,
             };
-
-            const { newRecipie } = this.props;
-            newRecipie(recipie);
+            const { saveEditedRecipie } = this.props;
+            saveEditedRecipie(recipie);
         } else {
             this.setState({
                 open: true,
@@ -85,51 +94,79 @@ export default class AddRecipie extends React.Component {
         }
     }
 
-
+    componentWillReceiveProps(newProps) {
+        if(newProps.editingRecipie !== this.props.editingRecipie) {
+            this.setState({
+                title: newProps.editingRecipie.title,
+                key: newProps.editingRecipie.key,
+                description: newProps.editingRecipie.description,
+                ingredients: newProps.editingRecipie.ingredients,
+                steps: newProps.editingRecipie.steps,
+            });
+        }
+    }
 
     render() {
+        const { editingRecipie } = this.props;
+        
+        let arraySteps = editingRecipie.steps.split("\n");
+        let descriptionArray = editingRecipie.description.split("\n");
+        if (arraySteps === undefined || arraySteps === null) {
+            arraySteps = ["No steps"];
+        }
+        if (descriptionArray === undefined || descriptionArray === null) {
+            descriptionArray = ["No description"];
+        }
         return (
             <section>
-                <h1>Add Recipe</h1>
-                <TextField floatingLabelText="Title"
-                    onChange={(event, newValue) => this.changeTitle(newValue)} />
+                <h1>Editing Recipe</h1>
 
-                <br /><TextField floatingLabelText="Description" onChange={(event, newValue) => this.changeDescription(newValue)}
-                    multiLine={true} rows={4} />
+                <TextField floatingLabelText="Title"
+                    onChange={(event, newValue) => this.changeTitle(newValue)}
+                    value={this.state.title} />
+                    {/* defaultValue={editingRecipie.title} /> */}
                 <br />
+                
+                <TextField floatingLabelText="Description" onChange={(event, newValue) => this.changeDescription(newValue)}
+                    multiLine={true} rows={4}
+                    value={this.state.description} />
+                <br />
+
 
                 {this.state.ingredients.map((ingredient, index) => (
                     <div key={index}>
                         <TextField
                             floatingLabelText="Ingredient"
                             value={ingredient.name}
-                            onChange={(event, newValue) => this.changeIngredient(index, newValue)} />
-
+                            onChange={(event, newValue) => this.changeIngredient(index, newValue)}
+                        />
                         <TextField
                             floatingLabelText="Amount"
                             value={ingredient.amount}
-                            onChange={(event, newValue) => this.changeAmount(index, newValue)} />
-
-
+                            onChange={(event, newValue) => this.changeAmount(index, newValue)}
+                        />
                         <FloatingActionButton secondary={true} onClick={() => this.handleRemove(index)}>
                             <Remove />
                         </FloatingActionButton>
-
                     </div>
                 ))}
 
-                <RaisedButton primary={true} onClick={() => this.handleAdd()}>Add Ingredient</RaisedButton>
 
+                <RaisedButton primary={true} onClick={() => this.handleAdd()}>Add Ingredient</RaisedButton>
                 <TextField floatingLabelText="Steps"
                     multiLine={true} rows={4}
-                    onChange={(event, newValue) => this.changeSteps(newValue)} />
+                    onChange={(event, newValue) => this.changeSteps(newValue)}
+                    value={this.state.steps} />
 
-                <RaisedButton onClick={() => this.submit()}>Add Recipe</RaisedButton>
+
+                <RaisedButton onClick={() => this.submit()}>Save Changes</RaisedButton>
                 <Snackbar
                     open={this.state.open}
                     message="Please enter a title"
                     autoHideDuration={2000}
                 />
+
+
             </section>
 
         );
