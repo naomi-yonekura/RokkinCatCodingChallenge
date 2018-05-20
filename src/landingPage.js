@@ -7,7 +7,7 @@ import ShowRecipie from './showRecipie';
 import { MuiThemeProvider } from 'material-ui/styles';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
-import Cake from 'material-ui/svg-icons/social/cake';
+import Restaurant from 'material-ui/svg-icons/maps/restaurant';
 import ContentAddCircle from 'material-ui/svg-icons/content/add-circle';
 
 import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
@@ -140,7 +140,7 @@ export default class LandingPage extends React.Component {
             <Router>
                 <section>
                     <AppBar title="Naomi Yonekura's Online Recipe Book" primary={true}
-                        iconElementLeft={<Cake style={{ width: 40, height: 40, color: '#ffffff' }} />}
+                        iconElementLeft={<Restaurant style={{ width: 40, height: 40, color: '#ffffff' }} />}
                         iconElementRight={
                             <section>
                                 <Link to='/addRecipe' >

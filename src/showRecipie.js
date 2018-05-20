@@ -5,7 +5,8 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import AppBar from 'material-ui/AppBar';
-import Search from 'material-ui/svg-icons/action/search';
+import Cake from 'material-ui/svg-icons/social/cake';
+
 import Person from 'material-ui/svg-icons/social/person';
 import Timer from 'material-ui/svg-icons/image/timer';
 import ActionThumbsUpDown from 'material-ui/svg-icons/action/thumbs-up-down';
@@ -65,7 +66,7 @@ export default class ShowRecipie extends React.Component {
                 <AppBar title="View Recipe"
                     style={{ backgroundColor: '#e0e0e0' }}
                     titleStyle={{ color: '#000000' }}
-                    iconElementLeft={<Search style={{ width: 40, height: 40 }} />}
+                    iconElementLeft={<Cake style={{ width: 40, height: 40 }} />}
                 />
                 <Card style={{ width: 700, minWidth: 500, minHeight: '30%', margin: '50 auto' }}>
 
