@@ -3,8 +3,8 @@ import Edit from 'material-ui/svg-icons/image/edit';
 import Delete from 'material-ui/svg-icons/action/delete';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 
-// import Grid from '@material-ui/core/Grid';
-
+import AppBar from 'material-ui/AppBar';
+import Search from 'material-ui/svg-icons/action/search';
 import Person from 'material-ui/svg-icons/social/person';
 import Timer from 'material-ui/svg-icons/image/timer';
 import ActionThumbsUpDown from 'material-ui/svg-icons/action/thumbs-up-down';
@@ -40,6 +40,11 @@ export default class ShowRecipie extends React.Component {
         }
         return (
             <section>
+                <AppBar title="View Recipe" 
+                    style={{backgroundColor: '#e0e0e0'}} 
+                    titleStyle={{color: '#000000'}}
+                    iconElementLeft={<Search style={{width: 40, height: 40}}/>}
+                />
                 <Card style={{ width: 700, minWidth: 500, minHeight: '30%', margin: '50 auto' }}>
 
                     <CardMedia overlay={
@@ -48,16 +53,10 @@ export default class ShowRecipie extends React.Component {
                         <img src='./images/redBlue1.jpg' alt="background" />
                     </CardMedia>
 
-
-
                     <CardActions>
-
                         <span style={{ alignItems: 'left' }}><Person style={{ margin: 5 }} /><span>{selectedRecipie.amountFeed}</span></span>
-
                         <span style={{ alignItems: 'center' }}><Timer style={{ margin: 5 }} /><span>{selectedRecipie.prepTime}</span></span>
-
                         <span style={{ alignItems: 'right' }}><ActionThumbsUpDown style={{ margin: 5 }} /><span>{selectedRecipie.difficulty}</span></span>
-
                     </CardActions>
                     <CardActions>
 
@@ -72,9 +71,6 @@ export default class ShowRecipie extends React.Component {
                                 <Delete />
                             </FloatingActionButton>
                         </Link>
-
-
-
 
                     </CardActions>
 

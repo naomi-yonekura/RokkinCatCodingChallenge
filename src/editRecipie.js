@@ -6,6 +6,9 @@ import Remove from 'material-ui/svg-icons/content/remove';
 import Snackbar from 'material-ui/Snackbar';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import { Link } from 'react-router-dom';
+import Edit from 'material-ui/svg-icons/image/edit';
+
+import AppBar from 'material-ui/AppBar';
 
 
 import {
@@ -145,11 +148,13 @@ export default class EditRecipie extends React.Component {
         }
         return (
             <section>
+                <AppBar title="Edit Recipe" 
+                    style={{backgroundColor: '#e0e0e0'}} 
+                    titleStyle={{color: '#000000'}}
+                    iconElementLeft={<Edit style={{width: 40, height: 40}}/>}
+                />
                 <Card style={{ width: 700, minWidth: 500, minHeight: '30%', margin: '50 auto' }}>
                     <CardText>
-
-
-
                         <TextField floatingLabelText="Title"
                             underlineStyle={{ color: '#000000' }}
                             floatingLabelStyle={{ color: '#000000' }}
@@ -211,8 +216,6 @@ export default class EditRecipie extends React.Component {
                                 </FloatingActionButton>
                             </div>
                         ))}
-
-
                         <TextField floatingLabelText="Steps"
                             underlineStyle={{ color: '#000000' }}
                             floatingLabelStyle={{ color: '#000000' }}
@@ -233,15 +236,9 @@ export default class EditRecipie extends React.Component {
                             message="Please enter a title"
                             autoHideDuration={2000}
                         />
-
                     </CardText>
                 </Card>
             </section>
-
         );
     }
-
-
-
 }
-

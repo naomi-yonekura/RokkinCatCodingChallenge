@@ -11,7 +11,8 @@ import RenderToLayer from 'material-ui/internal/RenderToLayer';
 import { Link } from 'react-router-dom';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Search from 'material-ui/svg-icons/action/search';
-
+import List from 'material-ui/svg-icons/action/list';
+import AppBar from 'material-ui/AppBar';
 
 export default class RecipieTable extends React.Component {
 
@@ -41,6 +42,12 @@ export default class RecipieTable extends React.Component {
 
         return (
             <section>
+
+                <AppBar title="Your Recipes"
+                    style={{ backgroundColor: '#e0e0e0' }}
+                    titleStyle={{ color: '#000000' }}
+                    iconElementLeft={<List style={{ width: 40, height: 40 }} />}
+                />
 
                 <Table onCellClick={(rowNumber, columnId) => choosenRecipie(rowNumber)}>
                     <TableHeader>

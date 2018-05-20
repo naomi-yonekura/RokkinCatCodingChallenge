@@ -1,8 +1,5 @@
-
 import React from 'react';
-// * Import and assets here
 
-// * Import any Compoenents here
 import AddRecipie from './addRecipie';
 import RecipieTable from './recipieTable';
 import EditRecipie from './editRecipie';
@@ -15,7 +12,6 @@ import ContentAddCircle from 'material-ui/svg-icons/content/add-circle';
 
 import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
-
 import {
     Table,
     TableBody,
@@ -26,8 +22,6 @@ import {
 } from 'material-ui/Table';
 import { darkBlack } from 'material-ui/styles/colors';
 import { IconButton } from 'material-ui';
-
-// ? Import the "database" here?
 
 let emptyRecipie = {
     title: '',
@@ -43,28 +37,22 @@ let emptyRecipie = {
     steps: '',
 }
 
-
 export default class LandingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // * Variables here
             editingRecipie: emptyRecipie,
             selectedRecipie: emptyRecipie,
             count: 0,
             allKeys: [],
         };
-
-        // ? to bind any functions in App here?
         this.newRecipie = this.newRecipie.bind(this);
         this.choosenRecipie = this.choosenRecipie.bind(this);
         this.editRecipie = this.editRecipie.bind(this);
     }
 
     newRecipie(recipie) {
-        // TODO fill in, save to local storage
         let title = recipie.key;
-
         let keys = localStorage.getItem('keys');
         if (keys === null) {
             keys = [];
@@ -150,28 +138,10 @@ export default class LandingPage extends React.Component {
                         style={{ marginBottom: 20 }}
                     />
 
-
-
-                    {/* <Link to='/' >
-                        <RaisedButton label="Home" secondary={true} />
-                    </Link>
-
-                    <Link to='/addRecipe'>
-                        <RaisedButton label="Add Recipe" secondary={true} />
-                    </Link>
-                    <Link to='/editRecipe'>
-                        <RaisedButton label="Edit Recipe" primary={true} />
-                    </Link>
-                    <Link to='/showRecipe'>
-                        <RaisedButton label="Show Recipe" secondary={true} />
-                    </Link>
-                    <p>removing above buttons later</p> */}
-
                     <Switch>
                         <Route exact={true} path="/" render={() => {
                             return (
                                 <section>
-                                    <h1>Home Page</h1>
                                     <RecipieTable
                                         allRecipies={this.state.allKeys}
                                         choosenRecipie={this.choosenRecipie}
@@ -207,12 +177,6 @@ export default class LandingPage extends React.Component {
                     </Switch>
                 </section>
             </Router>
-
-
         );
     }
-
-
 }
-
-

@@ -6,6 +6,8 @@ import Remove from 'material-ui/svg-icons/content/remove';
 import Snackbar from 'material-ui/Snackbar';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import { Link } from 'react-router-dom';
+import AppBar from 'material-ui/AppBar';
+import Add from 'material-ui/svg-icons/content/add';
 
 export default class AddRecipie extends React.Component {
     constructor(props) {
@@ -113,6 +115,12 @@ export default class AddRecipie extends React.Component {
 
         return (
             <section>
+                <AppBar title="Add Recipe" 
+                    style={{backgroundColor: '#e0e0e0'}} 
+                    titleStyle={{color: '#000000'}}
+                    iconElementLeft={<Add style={{width: 40, height: 40}}/>}
+                />
+
                 <Card style={{ width: 700, minWidth: 500, minHeight: '30%', margin: '50 auto' }}>
                     <CardText>
                         <TextField floatingLabelText="Title"
@@ -196,11 +204,6 @@ export default class AddRecipie extends React.Component {
                     </CardText>
                 </Card>
             </section>
-
         );
     }
-
-
-
 }
-
