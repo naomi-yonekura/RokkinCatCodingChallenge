@@ -3,7 +3,7 @@ import Edit from 'material-ui/svg-icons/image/edit';
 import Delete from 'material-ui/svg-icons/action/delete';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
 import Person from 'material-ui/svg-icons/social/person';
 import Timer from 'material-ui/svg-icons/image/timer';
@@ -52,30 +52,23 @@ export default class ShowRecipie extends React.Component {
 
                     <CardActions>
 
-                        <Grid container spaceing={24}>
-                            <Grid item xs={6}>
-                                <span style={{ alignItems: 'left' }}><Person style={{ margin: 5 }} /><span>{selectedRecipie.amountFeed}</span></span>
+                        <span style={{ alignItems: 'left' }}><Person style={{ margin: 5 }} /><span>{selectedRecipie.amountFeed}</span></span>
 
-                            </Grid>
-                            <Grid item xs={6}>
-                                <span style={{ alignItems: 'center' }}><Timer style={{ margin: 5 }} /><span>{selectedRecipie.prepTime}</span></span>
+                        <span style={{ alignItems: 'center' }}><Timer style={{ margin: 5 }} /><span>{selectedRecipie.prepTime}</span></span>
 
-                            </Grid>
-                            <Grid item xs={6}>
-                                <span style={{ alignItems: 'right' }}><ActionThumbsUpDown style={{ margin: 5 }} /><span>{selectedRecipie.difficulty}</span></span>
+                        <span style={{ alignItems: 'right' }}><ActionThumbsUpDown style={{ margin: 5 }} /><span>{selectedRecipie.difficulty}</span></span>
 
-                            </Grid>
-                            <Grid item xs={6}>
-                                <FloatingActionButton secondary={true} style={style} onClick={() => editRecipie(recipie)}>
-                                    <Edit />
-                                </FloatingActionButton>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <FloatingActionButton secondary={true} style={style} onClick={() => deleteRecipie(recipie)}>
-                                    <Delete />
-                                </FloatingActionButton>
-                            </Grid>
-                        </Grid>
+                    </CardActions>
+                    <CardActions>
+
+                        <FloatingActionButton secondary={true} style={style} onClick={() => editRecipie(recipie)}>
+                            <Edit />
+                        </FloatingActionButton>
+                        <FloatingActionButton secondary={true} style={style} onClick={() => deleteRecipie(recipie)}>
+                            <Delete />
+                        </FloatingActionButton>
+
+
 
 
                     </CardActions>
