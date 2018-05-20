@@ -139,7 +139,6 @@ export default class EditRecipie extends React.Component {
         }
         return (
             <section>
-                <h1>Editing Recipe</h1>
 
                 <TextField floatingLabelText="Title"
                     onChange={(event, newValue) => this.changeTitle(newValue)}

@@ -2,8 +2,8 @@ import React from 'react';
 import Edit from 'material-ui/svg-icons/image/edit';
 import Delete from 'material-ui/svg-icons/action/delete';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import { Row, Col } from 'react-bootstrap';
 
+import Grid from '@material-ui/core/Grid';
 
 import Person from 'material-ui/svg-icons/social/person';
 import Timer from 'material-ui/svg-icons/image/timer';
@@ -45,14 +45,45 @@ export default class ShowRecipie extends React.Component {
                     <CardMedia overlay={
                         <CardTitle title={selectedRecipie.title} subtitle={selectedRecipie.foodType} />
                     }>
-                        <img src='./images/background1.jpg' alt="background" />
+                        <img src='./images/redBlue1.jpg' alt="background" />
                     </CardMedia>
 
+
+
                     <CardActions>
-                        <span style={{alignItems:'left'}}><Person style={{ margin: 5 }} /><span>{selectedRecipie.amountFeed}</span></span>
-                        <span style={{alignItems:'center'}}><Timer style={{ margin: 5 }} /><span>{selectedRecipie.prepTime}</span></span>
-                        <span style={{alignItems:'right'}}><ActionThumbsUpDown style={{ margin: 5 }} /><span>{selectedRecipie.difficulty}</span></span>
+
+                        <Grid container spaceing={24}>
+                            <Grid item xs={6}>
+                                <span style={{ alignItems: 'left' }}><Person style={{ margin: 5 }} /><span>{selectedRecipie.amountFeed}</span></span>
+
+                            </Grid>
+                            <Grid item xs={6}>
+                                <span style={{ alignItems: 'center' }}><Timer style={{ margin: 5 }} /><span>{selectedRecipie.prepTime}</span></span>
+
+                            </Grid>
+                            <Grid item xs={6}>
+                                <span style={{ alignItems: 'right' }}><ActionThumbsUpDown style={{ margin: 5 }} /><span>{selectedRecipie.difficulty}</span></span>
+
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FloatingActionButton secondary={true} style={style} onClick={() => editRecipie(recipie)}>
+                                    <Edit />
+                                </FloatingActionButton>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FloatingActionButton secondary={true} style={style} onClick={() => deleteRecipie(recipie)}>
+                                    <Delete />
+                                </FloatingActionButton>
+                            </Grid>
+                        </Grid>
+
+
                     </CardActions>
+
+
+
+
+
                     <CardText>
                         <h3>Description</h3>
                         {descriptionArray.map(function (detail, index) {

@@ -17,8 +17,8 @@ import { amber500 } from 'material-ui/styles/colors';
 
 const theme = getMuiTheme({
     palette: {
-        primary1Color: '#FFC107',
-        accent1Color: '#b942f4',
+        primary1Color: '#d60431',
+        accent1Color: '#0eb4ed',
     }
 })
 

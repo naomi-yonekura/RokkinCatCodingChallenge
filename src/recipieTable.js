@@ -41,7 +41,6 @@ export default class RecipieTable extends React.Component {
 
         return (
             <section>
-                <h1>All Recipies</h1>
 
                 <Table onCellClick={(rowNumber, columnId) => choosenRecipie(rowNumber)}>
                     <TableHeader>

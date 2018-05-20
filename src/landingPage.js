@@ -138,8 +138,8 @@ export default class LandingPage extends React.Component {
             <Router>
                 <section>
                     <AppBar title="Naomi Yonekura's Online Recipe Book" primary={true}
-                        titleStyle={{ color: '#000000' }}
-                        iconElementLeft={<Cake style={{width: 40, height: 40}}/>}
+                        // titleStyle={{ color: '#000000' }}
+                        iconElementLeft={<Cake style={{width: 40, height: 40, color: '#ffffff'}}/>}
                         // iconElementRight={
                         //     <Link to='/addRecipe'>
                         //         <IconButton ><ContentAddCircle style={{width: 120, height: 120}}/></IconButton>
@@ -153,8 +153,6 @@ export default class LandingPage extends React.Component {
                         <RaisedButton label="Home" secondary={true} />
                     </Link>
 
-
-
                     <Link to='/addRecipe'>
                         <RaisedButton label="Add Recipe" primary={true} />
                     </Link>
@@ -164,7 +162,7 @@ export default class LandingPage extends React.Component {
                     <Link to='/showRecipe'>
                         <RaisedButton label="Show Recipe" secondary={true} />
                     </Link>
-
+                    <p>removing above buttons later</p>
 
                     <Switch>
                         <Route exact={true} path="/" render={() => {

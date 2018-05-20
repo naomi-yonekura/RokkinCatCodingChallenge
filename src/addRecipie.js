@@ -114,7 +114,6 @@ export default class AddRecipie extends React.Component {
     render() {
         return (
             <section>
-                <h1>Add Recipe</h1>
                 <TextField floatingLabelText="Title"
                     onChange={(event, newValue) => this.changeTitle(newValue)} />
 
