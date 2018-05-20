@@ -2,6 +2,7 @@ import React from 'react';
 import Edit from 'material-ui/svg-icons/image/edit';
 import Delete from 'material-ui/svg-icons/action/delete';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import AppBar from 'material-ui/AppBar';
 import Search from 'material-ui/svg-icons/action/search';
@@ -9,6 +10,7 @@ import Person from 'material-ui/svg-icons/social/person';
 import Timer from 'material-ui/svg-icons/image/timer';
 import ActionThumbsUpDown from 'material-ui/svg-icons/action/thumbs-up-down';
 import { Link } from 'react-router-dom';
+import Popup from 'reactjs-popup';
 
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import {
@@ -24,6 +26,26 @@ const style = {
     margin: 10,
 };
 export default class ShowRecipie extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+        }
+        this.openPopup.bind(this);
+        this.closePopup.bind(this);
+    }
+
+    openPopup() {
+        this.setState({
+            open: true,
+        });
+    }
+
+    closePopup() {
+        this.setState({
+            open: false,
+        })
+    }
 
     render() {
         const { editRecipie } = this.props;
@@ -40,10 +62,10 @@ export default class ShowRecipie extends React.Component {
         }
         return (
             <section>
-                <AppBar title="View Recipe" 
-                    style={{backgroundColor: '#e0e0e0'}} 
-                    titleStyle={{color: '#000000'}}
-                    iconElementLeft={<Search style={{width: 40, height: 40}}/>}
+                <AppBar title="View Recipe"
+                    style={{ backgroundColor: '#e0e0e0' }}
+                    titleStyle={{ color: '#000000' }}
+                    iconElementLeft={<Search style={{ width: 40, height: 40 }} />}
                 />
                 <Card style={{ width: 700, minWidth: 500, minHeight: '30%', margin: '50 auto' }}>
 
@@ -59,18 +81,37 @@ export default class ShowRecipie extends React.Component {
                         <span style={{ alignItems: 'right' }}><ActionThumbsUpDown style={{ margin: 5 }} /><span>{selectedRecipie.difficulty}</span></span>
                     </CardActions>
                     <CardActions>
-
                         <Link to='/editRecipe'>
                             <FloatingActionButton secondary={true} style={style} onClick={() => editRecipie(selectedRecipie)}>
                                 <Edit />
                             </FloatingActionButton>
                         </Link>
 
-                        <Link to='/'>
-                            <FloatingActionButton secondary={true} style={style} onClick={() => deleteRecipie(selectedRecipie)}>
-                                <Delete />
-                            </FloatingActionButton>
-                        </Link>
+
+
+
+                        <FloatingActionButton secondary={true} style={style} onClick={() =>this.openPopup()}>
+                            <Delete />
+                        </FloatingActionButton>
+                        <Popup open={this.state.open}
+                            closeOnDocumentClick={false}
+                            closeOnEscape={false}
+                            position="top center">
+                            <div>
+                                <p>Are you sure you want to delete this recipe?</p>
+
+                                <RaisedButton style={{ margin: 5 }} secondary={true} label="No" onClick={() => this.closePopup()} />
+
+
+                                <Link to='/'>
+                                    <RaisedButton style={{ margin: 5 }} primary={true} label="Yes" onClick={() => deleteRecipie(selectedRecipie)} />
+                                </Link>
+                            </div>
+                        </Popup>
+
+
+
+
 
                     </CardActions>
 

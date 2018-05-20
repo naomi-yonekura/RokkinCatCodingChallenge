@@ -78,6 +78,7 @@ export default class LandingPage extends React.Component {
         for (var k in keys) {
             if (k === title) {
                 title = title + "1";
+                recipie.key = title + "1";
             }
         }
         keys.push(title);
