@@ -21,6 +21,10 @@ export default class EditRecipie extends React.Component {
         this.state = {
             title: this.props.editingRecipie.title,
             key: this.props.editingRecipie.key,
+            prepTime: this.props.editingRecipie.prepTime,
+            foodType: this.props.editingRecipie.foodType,
+            diffiictuly: this.props.editingRecipie.diffiictuly,
+            amountFeed: this.props.editingRecipie.amountFeed,
             description: this.props.editingRecipie.description,
             ingredients: this.props.editingRecipie.ingredients,
             steps: this.props.editingRecipie.steps,
@@ -34,6 +38,22 @@ export default class EditRecipie extends React.Component {
 
     changeDescription(newValue) {
         this.setState({ description: newValue });
+    }
+
+    changePrepTime(newValue) {
+        this.setState({ prepTime: newValue });
+    }
+
+    changeFoodType(newValue) {
+        this.setState({ foodType: newValue });
+    }
+
+    changeDifficulty(newValue) {
+        this.setState({ difficulty: newValue });
+    }
+
+    changeAmountFeed(newValue) {
+        this.setState({ amountFeed: newValue });
     }
 
     changeSteps(newValue) {
@@ -95,7 +115,7 @@ export default class EditRecipie extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if(newProps.editingRecipie !== this.props.editingRecipie) {
+        if (newProps.editingRecipie !== this.props.editingRecipie) {
             this.setState({
                 title: newProps.editingRecipie.title,
                 key: newProps.editingRecipie.key,
@@ -108,7 +128,7 @@ export default class EditRecipie extends React.Component {
 
     render() {
         const { editingRecipie } = this.props;
-        
+
         let arraySteps = editingRecipie.steps.split("\n");
         let descriptionArray = editingRecipie.description.split("\n");
         if (arraySteps === undefined || arraySteps === null) {
@@ -124,14 +144,17 @@ export default class EditRecipie extends React.Component {
                 <TextField floatingLabelText="Title"
                     onChange={(event, newValue) => this.changeTitle(newValue)}
                     value={this.state.title} />
-                    {/* defaultValue={editingRecipie.title} /> */}
                 <br />
-                
+
                 <TextField floatingLabelText="Description" onChange={(event, newValue) => this.changeDescription(newValue)}
                     multiLine={true} rows={4}
                     value={this.state.description} />
                 <br />
 
+                <br /><TextField value={this.state.prepTime} floatingLabelText="Prep Time" onChange={(event, newValue) => this.changePrepTime(newValue)} />
+                <br /><TextField value={this.state.foodType} floatingLabelText="Type of Food" onChange={(event, newValue) => this.changeFoodType(newValue)} />
+                <br /><TextField value={this.state.diffiictuly} floatingLabelText="Difficulty" onChange={(event, newValue) => this.changeDifficulty(newValue)} />
+                <br /><TextField value={this.state.amountFeed} floatingLabelText="Amount of People Feed" onChange={(event, newValue) => this.changeAmountFeed(newValue)} />
 
                 {this.state.ingredients.map((ingredient, index) => (
                     <div key={index}>

@@ -11,14 +11,14 @@ import { MuiThemeProvider } from 'material-ui/styles';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import { red600 } from 'material-ui/styles/colors';
-import { blue500 } from 'material-ui/styles/colors';
+import { red } from 'material-ui/styles/colors';
+import { amber500 } from 'material-ui/styles/colors';
 
 
 const theme = getMuiTheme({
     palette: {
-        primary1Color: red600,
-        accent1Color: blue500,
+        primary1Color: '#FFC107',
+        accent1Color: '#b942f4',
     }
 })
 

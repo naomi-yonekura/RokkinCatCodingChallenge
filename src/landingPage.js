@@ -10,7 +10,7 @@ import ShowRecipie from './showRecipie';
 import { MuiThemeProvider } from 'material-ui/styles';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 import {
     Table,
@@ -27,6 +27,10 @@ let emptyRecipie = {
     title: '',
     key: '',
     description: '',
+    prepTime: '',
+    foodType: '',
+    difficulty: '',
+    amountFeed: '',
     ingredients: [
         { name: '', amount: '' },
     ],
@@ -135,7 +139,7 @@ export default class LandingPage extends React.Component {
                             <RaisedButton label="Home" primary={true} />
                         </Link>
                         <Link to='/addRecipe'>
-                            <RaisedButton label="Add Recipe" primary={true} />
+                            <RaisedButton label="Add Recipe" secondary={true} />
                         </Link>
                         <Link to='/editRecipe'>
                             <RaisedButton label="Edit Recipe" primary={true} />
@@ -160,9 +164,7 @@ export default class LandingPage extends React.Component {
 
                             <Route path="/addRecipe" render={() => {
                                 return (
-
                                     <AddRecipie newRecipie={this.newRecipie}></AddRecipie>
-
                                 );
                             }} />
 
