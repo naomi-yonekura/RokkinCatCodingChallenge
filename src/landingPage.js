@@ -37,12 +37,26 @@ let emptyRecipie = {
     steps: '',
 }
 
+let startingSelectedRecipie ={
+    title: 'Example Title',
+    key: 'Null',
+    description: 'Example Description',
+    prepTime: 'Example Time',
+    foodType: 'Example Type',
+    difficulty: 'Example Difficuluty',
+    amountFeed: 'Example Amount',
+    ingredients: [
+        { name: 'Example Ingredient', amount: 'Exmaple Amount' },
+    ],
+    steps: 'Example Steps',
+}
+
 export default class LandingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             editingRecipie: emptyRecipie,
-            selectedRecipie: emptyRecipie,
+            selectedRecipie: startingSelectedRecipie,
             count: 0,
             allKeys: [],
         };
