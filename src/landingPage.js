@@ -9,8 +9,12 @@ import EditRecipie from './editRecipie';
 import ShowRecipie from './showRecipie';
 import { MuiThemeProvider } from 'material-ui/styles';
 import RaisedButton from 'material-ui/RaisedButton';
+import AppBar from 'material-ui/AppBar';
+import Cake from 'material-ui/svg-icons/social/cake';
+import ContentAddCircle from 'material-ui/svg-icons/content/add-circle';
 
 import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
+
 
 import {
     Table,
@@ -20,6 +24,8 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
+import { darkBlack } from 'material-ui/styles/colors';
+import { IconButton } from 'material-ui';
 
 // ? Import the "database" here?
 
@@ -129,71 +135,79 @@ export default class LandingPage extends React.Component {
 
     render() {
         return (
-            <section>
-                <h1>Naomi's Amazing Online Recipe Book!</h1>
-
-                <Router>
-                    <section>
-
-                        <Link to='/' >
-                            <RaisedButton label="Home" secondary={true} />
-                        </Link>
-
-
-
-                        <Link to='/addRecipe'>
-                            <RaisedButton label="Add Recipe" primary={true} />
-                        </Link>
-                        <Link to='/editRecipe'>
-                            <RaisedButton label="Edit Recipe" primary={true} />
-                        </Link>
-                        <Link to='/showRecipe'>
-                            <RaisedButton label="Show Recipe" secondary={true} />
-                        </Link>
+            <Router>
+                <section>
+                    <AppBar title="Naomi Yonekura's Online Recipe Book" primary={true}
+                        titleStyle={{ color: '#000000' }}
+                        iconElementLeft={<Cake style={{width: 40, height: 40}}/>}
+                        // iconElementRight={
+                        //     <Link to='/addRecipe'>
+                        //         <IconButton ><ContentAddCircle style={{width: 120, height: 120}}/></IconButton>
+                        //     </Link>}
+                        style={{ marginBottom: 20 }}
+                    />
 
 
-                        <Switch>
-                            <Route exact={true} path="/" render={() => {
-                                return (
-                                    <section>
-                                        <h1>Home Page</h1>
-                                        <RecipieTable
-                                            allRecipies={this.state.allKeys}
-                                            choosenRecipie={this.choosenRecipie}
-                                        ></RecipieTable>
-                                    </section>
-                                );
-                            }} />
 
-                            <Route path="/addRecipe" render={() => {
-                                return (
-                                    <AddRecipie newRecipie={this.newRecipie}></AddRecipie>
-                                );
-                            }} />
+                    <Link to='/' >
+                        <RaisedButton label="Home" secondary={true} />
+                    </Link>
 
-                            <Route path="/editRecipe" render={() => {
-                                return (
-                                    <EditRecipie
-                                        editingRecipie={this.state.editingRecipie}
-                                        saveEditedRecipie={this.saveEditedRecipie}
-                                    ></EditRecipie>
-                                );
-                            }} />
 
-                            <Route path="/showRecipe" render={() => {
-                                return (
-                                    <ShowRecipie
-                                        selectedRecipie={this.state.selectedRecipie}
-                                        editRecipie={this.editRecipie}
-                                        deleteRecipie={this.deleteRecipie}
-                                    ></ShowRecipie>
-                                );
-                            }} />
-                        </Switch>
-                    </section>
-                </Router>
 
-            </section>
+                    <Link to='/addRecipe'>
+                        <RaisedButton label="Add Recipe" primary={true} />
+                    </Link>
+                    <Link to='/editRecipe'>
+                        <RaisedButton label="Edit Recipe" primary={true} />
+                    </Link>
+                    <Link to='/showRecipe'>
+                        <RaisedButton label="Show Recipe" secondary={true} />
+                    </Link>
+
+
+                    <Switch>
+                        <Route exact={true} path="/" render={() => {
+                            return (
+                                <section>
+                                    <h1>Home Page</h1>
+                                    <RecipieTable
+                                        allRecipies={this.state.allKeys}
+                                        choosenRecipie={this.choosenRecipie}
+                                    ></RecipieTable>
+                                </section>
+                            );
+                        }} />
+
+                        <Route path="/addRecipe" render={() => {
+                            return (
+                                <AddRecipie newRecipie={this.newRecipie}></AddRecipie>
+                            );
+                        }} />
+
+                        <Route path="/editRecipe" render={() => {
+                            return (
+                                <EditRecipie
+                                    editingRecipie={this.state.editingRecipie}
+                                    saveEditedRecipie={this.saveEditedRecipie}
+                                ></EditRecipie>
+                            );
+                        }} />
+
+                        <Route path="/showRecipe" render={() => {
+                            return (
+                                <ShowRecipie
+                                    selectedRecipie={this.state.selectedRecipie}
+                                    editRecipie={this.editRecipie}
+                                    deleteRecipie={this.deleteRecipie}
+                                ></ShowRecipie>
+                            );
+                        }} />
+                    </Switch>
+                </section>
+            </Router>
+
+
         );
     }
 
