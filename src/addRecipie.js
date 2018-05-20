@@ -23,6 +23,7 @@ export default class AddRecipie extends React.Component {
             ingredients: [{ name: '', amount: '' }],
             steps: '',
             open: false,
+            sucess: false
         };
     }
 
@@ -104,6 +105,9 @@ export default class AddRecipie extends React.Component {
             };
             const { newRecipie } = this.props;
             newRecipie(recipie);
+            this.setState({
+                sucess: true,
+            })
         } else {
             this.setState({
                 open: true,
@@ -199,6 +203,11 @@ export default class AddRecipie extends React.Component {
                         <Snackbar
                             open={this.state.open}
                             message="Please enter a title"
+                            autoHideDuration={2000}
+                        />
+                        <Snackbar
+                            open={this.state.sucess}
+                            message="Successfully saved this recipe!"
                             autoHideDuration={2000}
                         />
                     </CardText>
