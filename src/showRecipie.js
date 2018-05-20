@@ -8,7 +8,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Person from 'material-ui/svg-icons/social/person';
 import Timer from 'material-ui/svg-icons/image/timer';
 import ActionThumbsUpDown from 'material-ui/svg-icons/action/thumbs-up-down';
-
+import { Link } from 'react-router-dom';
 
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import {
@@ -61,21 +61,19 @@ export default class ShowRecipie extends React.Component {
                     </CardActions>
                     <CardActions>
 
-                        <FloatingActionButton secondary={true} style={style} onClick={() => editRecipie(recipie)}>
+                        <FloatingActionButton secondary={true} style={style} onClick={() => editRecipie(selectedRecipie)}>
                             <Edit />
                         </FloatingActionButton>
-                        <FloatingActionButton secondary={true} style={style} onClick={() => deleteRecipie(recipie)}>
+                        <Link to='/'>
+                        <FloatingActionButton secondary={true} style={style} onClick={() => deleteRecipie(selectedRecipie)}>
                             <Delete />
                         </FloatingActionButton>
+                        </Link>
 
 
 
 
                     </CardActions>
-
-
-
-
 
                     <CardText>
                         <h3>Description</h3>

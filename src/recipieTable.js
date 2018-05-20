@@ -28,7 +28,7 @@ export default class RecipieTable extends React.Component {
             for (var k in allKeys) {
                 let temp = JSON.parse(localStorage.getItem(allKeys[k]));
                 if (temp !== null) {
-                    recipies.push(temp.title);
+                    recipies.push(temp);
                 }
             }
             for (let i = 0; i < recipies.length; i) {
@@ -46,7 +46,9 @@ export default class RecipieTable extends React.Component {
                     <TableHeader>
                         <TableRow>
                             <TableHeaderColumn>Title</TableHeaderColumn>
-                            {/* <TableHeaderColumn>Date Created (?)</TableHeaderColumn> */}
+                            <TableHeaderColumn>Prep Time</TableHeaderColumn>
+                            <TableHeaderColumn>Difficulty</TableHeaderColumn>
+                            <TableHeaderColumn>View Recipe</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
 
@@ -56,7 +58,13 @@ export default class RecipieTable extends React.Component {
                             return <TableRow key={index}>
 
                                 <TableRowColumn>
-                                    {name}
+                                    {name.title}
+                                </TableRowColumn>
+                                <TableRowColumn>
+                                    {name.prepTime}
+                                </TableRowColumn>
+                                <TableRowColumn>
+                                    {name.difficulty}
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <Link to='/showRecipe'>

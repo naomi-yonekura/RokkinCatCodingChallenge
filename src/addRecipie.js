@@ -4,7 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Remove from 'material-ui/svg-icons/content/remove';
 import Snackbar from 'material-ui/Snackbar';
-
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import { Link } from 'react-router-dom';
 
 export default class AddRecipie extends React.Component {
     constructor(props) {
@@ -114,49 +115,59 @@ export default class AddRecipie extends React.Component {
     render() {
         return (
             <section>
-                <TextField floatingLabelText="Title"
-                    onChange={(event, newValue) => this.changeTitle(newValue)} />
-
-                <br /><TextField floatingLabelText="Description" onChange={(event, newValue) => this.changeDescription(newValue)}
-                    multiLine={true} rows={4} />
-
-                <br /><TextField floatingLabelText="Prep Time" onChange={(event, newValue) => this.changePrepTime(newValue)} />
-                <br /><TextField floatingLabelText="Type of Food" onChange={(event, newValue) => this.changeFoodType(newValue)} />
-                <br /><TextField floatingLabelText="Difficulty" onChange={(event, newValue) => this.changeDifficulty(newValue)} />
-                <br /><TextField floatingLabelText="Amount of People Feed" onChange={(event, newValue) => this.changeAmountFeed(newValue)} />
-
-                {this.state.ingredients.map((ingredient, index) => (
-                    <div key={index}>
-                        <TextField
-                            floatingLabelText="Ingredient"
-                            value={ingredient.name}
-                            onChange={(event, newValue) => this.changeIngredient(index, newValue)} />
-
-                        <TextField
-                            floatingLabelText="Amount"
-                            value={ingredient.amount}
-                            onChange={(event, newValue) => this.changeAmount(index, newValue)} />
+                <Card style={{ width: 700, minWidth: 500, minHeight: '30%', margin: '50 auto' }}>
 
 
-                        <FloatingActionButton secondary={true} onClick={() => this.handleRemove(index)}>
-                            <Remove />
-                        </FloatingActionButton>
 
-                    </div>
-                ))}
+                    <CardText>
 
-                <RaisedButton primary={true} onClick={() => this.handleAdd()}>Add Ingredient</RaisedButton>
 
-                <TextField floatingLabelText="Steps"
-                    multiLine={true} rows={4}
-                    onChange={(event, newValue) => this.changeSteps(newValue)} />
+                        <TextField floatingLabelText="Title"
+                            onChange={(event, newValue) => this.changeTitle(newValue)} />
 
-                <RaisedButton onClick={() => this.submit()}>Add Recipe</RaisedButton>
-                <Snackbar
-                    open={this.state.open}
-                    message="Please enter a title"
-                    autoHideDuration={2000}
-                />
+                        <br /><TextField floatingLabelText="Description" onChange={(event, newValue) => this.changeDescription(newValue)}
+                            multiLine={true} rows={4} />
+
+                        <br /><TextField floatingLabelText="Prep Time" onChange={(event, newValue) => this.changePrepTime(newValue)} />
+                        <br /><TextField floatingLabelText="Type of Food" onChange={(event, newValue) => this.changeFoodType(newValue)} />
+                        <br /><TextField floatingLabelText="Difficulty" onChange={(event, newValue) => this.changeDifficulty(newValue)} />
+                        <br /><TextField floatingLabelText="Amount of People Feed" onChange={(event, newValue) => this.changeAmountFeed(newValue)} />
+
+                        {this.state.ingredients.map((ingredient, index) => (
+                            <div key={index}>
+                                <TextField
+                                    floatingLabelText="Ingredient"
+                                    value={ingredient.name}
+                                    onChange={(event, newValue) => this.changeIngredient(index, newValue)} />
+
+                                <TextField
+                                    floatingLabelText="Amount"
+                                    value={ingredient.amount}
+                                    onChange={(event, newValue) => this.changeAmount(index, newValue)} />
+
+
+                                <FloatingActionButton secondary={true} onClick={() => this.handleRemove(index)}>
+                                    <Remove />
+                                </FloatingActionButton>
+
+                            </div>
+                        ))}
+                        <TextField floatingLabelText="Steps"
+                            multiLine={true} rows={4}
+                            onChange={(event, newValue) => this.changeSteps(newValue)} />
+
+                        <RaisedButton style={{ margin: 20, minWidth: 100 }} secondary={true} onClick={() => this.handleAdd()}>Add Ingredient</RaisedButton>
+
+                        <Link to='/'>
+                            <RaisedButton style={{}} primary={true} onClick={() => this.submit()}>Add Recipe</RaisedButton>
+                        </Link>
+                        <Snackbar
+                            open={this.state.open}
+                            message="Please enter a title"
+                            autoHideDuration={2000}
+                        />
+                    </CardText>
+                </Card>
             </section>
 
         );

@@ -4,6 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Remove from 'material-ui/svg-icons/content/remove';
 import Snackbar from 'material-ui/Snackbar';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+
 
 import {
     Table,
@@ -139,56 +141,61 @@ export default class EditRecipie extends React.Component {
         }
         return (
             <section>
+                <Card style={{ width: 700, minWidth: 500, minHeight: '30%', margin: '50 auto' }}>
+                    <CardText>
 
-                <TextField floatingLabelText="Title"
-                    onChange={(event, newValue) => this.changeTitle(newValue)}
-                    value={this.state.title} />
-                <br />
 
-                <TextField floatingLabelText="Description" onChange={(event, newValue) => this.changeDescription(newValue)}
-                    multiLine={true} rows={4}
-                    value={this.state.description} />
-                <br />
 
-                <br /><TextField value={this.state.prepTime} floatingLabelText="Prep Time" onChange={(event, newValue) => this.changePrepTime(newValue)} />
-                <br /><TextField value={this.state.foodType} floatingLabelText="Type of Food" onChange={(event, newValue) => this.changeFoodType(newValue)} />
-                <br /><TextField value={this.state.diffiictuly} floatingLabelText="Difficulty" onChange={(event, newValue) => this.changeDifficulty(newValue)} />
-                <br /><TextField value={this.state.amountFeed} floatingLabelText="Amount of People Feed" onChange={(event, newValue) => this.changeAmountFeed(newValue)} />
+                        <TextField floatingLabelText="Title"
+                            onChange={(event, newValue) => this.changeTitle(newValue)}
+                            value={this.state.title} />
+                        <br />
 
-                {this.state.ingredients.map((ingredient, index) => (
-                    <div key={index}>
-                        <TextField
-                            floatingLabelText="Ingredient"
-                            value={ingredient.name}
-                            onChange={(event, newValue) => this.changeIngredient(index, newValue)}
+                        <TextField floatingLabelText="Description" onChange={(event, newValue) => this.changeDescription(newValue)}
+                            multiLine={true} rows={4}
+                            value={this.state.description} />
+                        <br />
+
+                        <br /><TextField value={this.state.prepTime} floatingLabelText="Prep Time" onChange={(event, newValue) => this.changePrepTime(newValue)} />
+                        <br /><TextField value={this.state.foodType} floatingLabelText="Type of Food" onChange={(event, newValue) => this.changeFoodType(newValue)} />
+                        <br /><TextField value={this.state.diffiictuly} floatingLabelText="Difficulty" onChange={(event, newValue) => this.changeDifficulty(newValue)} />
+                        <br /><TextField value={this.state.amountFeed} floatingLabelText="Amount of People Feed" onChange={(event, newValue) => this.changeAmountFeed(newValue)} />
+
+                        {this.state.ingredients.map((ingredient, index) => (
+                            <div key={index}>
+                                <TextField
+                                    floatingLabelText="Ingredient"
+                                    value={ingredient.name}
+                                    onChange={(event, newValue) => this.changeIngredient(index, newValue)}
+                                />
+                                <TextField
+                                    floatingLabelText="Amount"
+                                    value={ingredient.amount}
+                                    onChange={(event, newValue) => this.changeAmount(index, newValue)}
+                                />
+                                <FloatingActionButton secondary={true} onClick={() => this.handleRemove(index)}>
+                                    <Remove />
+                                </FloatingActionButton>
+                            </div>
+                        ))}
+
+
+                        <TextField floatingLabelText="Steps"
+                            multiLine={true} rows={4}
+                            onChange={(event, newValue) => this.changeSteps(newValue)}
+                            value={this.state.steps} />
+
+                        <RaisedButton style={{ margin: 20, minWidth: 100 }} secondary={true} onClick={() => this.handleAdd()}>Add Ingredient</RaisedButton>
+
+                        <RaisedButton primary={true} onClick={() => this.submit()}>Save Changes</RaisedButton>
+                        <Snackbar
+                            open={this.state.open}
+                            message="Please enter a title"
+                            autoHideDuration={2000}
                         />
-                        <TextField
-                            floatingLabelText="Amount"
-                            value={ingredient.amount}
-                            onChange={(event, newValue) => this.changeAmount(index, newValue)}
-                        />
-                        <FloatingActionButton secondary={true} onClick={() => this.handleRemove(index)}>
-                            <Remove />
-                        </FloatingActionButton>
-                    </div>
-                ))}
 
-
-                <RaisedButton primary={true} onClick={() => this.handleAdd()}>Add Ingredient</RaisedButton>
-                <TextField floatingLabelText="Steps"
-                    multiLine={true} rows={4}
-                    onChange={(event, newValue) => this.changeSteps(newValue)}
-                    value={this.state.steps} />
-
-
-                <RaisedButton onClick={() => this.submit()}>Save Changes</RaisedButton>
-                <Snackbar
-                    open={this.state.open}
-                    message="Please enter a title"
-                    autoHideDuration={2000}
-                />
-
-
+                    </CardText>
+                </Card>
             </section>
 
         );
