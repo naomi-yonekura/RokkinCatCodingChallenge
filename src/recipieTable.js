@@ -8,6 +8,9 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 import RenderToLayer from 'material-ui/internal/RenderToLayer';
+import { Link } from 'react-router-dom';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import Search from 'material-ui/svg-icons/action/search';
 
 
 export default class RecipieTable extends React.Component {
@@ -39,6 +42,7 @@ export default class RecipieTable extends React.Component {
         return (
             <section>
                 <h1>All Recipies</h1>
+
                 <Table onCellClick={(rowNumber, columnId) => choosenRecipie(rowNumber)}>
                     <TableHeader>
                         <TableRow>
@@ -46,12 +50,30 @@ export default class RecipieTable extends React.Component {
                             {/* <TableHeaderColumn>Date Created (?)</TableHeaderColumn> */}
                         </TableRow>
                     </TableHeader>
+
                     <TableBody>
+
                         {names.map(function (name, index) {
-                            return <TableRow key={index}><TableRowColumn>{name}</TableRowColumn></TableRow>
+                            return <TableRow key={index}>
+
+                                <TableRowColumn>
+                                    {name}
+                                </TableRowColumn>
+                                <TableRowColumn>
+                                    <Link to='/showRecipe'>
+                                        <FloatingActionButton secondary={true}>
+                                            <Search />
+                                        </FloatingActionButton>
+                                    </Link>
+                                </TableRowColumn>
+
+                            </TableRow>
                         })}
+
                     </TableBody>
+
                 </Table>
+
             </section>
         );
     }

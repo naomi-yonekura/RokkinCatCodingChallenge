@@ -40,10 +40,7 @@ export default class ShowRecipie extends React.Component {
         }
         return (
             <section>
-                <h2>Showing Recipes</h2>
-
-
-                <Card>
+                <Card style={{ width: 700, minWidth: 500, minHeight: '30%', margin: '50 auto' }}>
 
                     <CardMedia overlay={
                         <CardTitle title={selectedRecipie.title} subtitle={selectedRecipie.foodType} />
@@ -52,17 +49,9 @@ export default class ShowRecipie extends React.Component {
                     </CardMedia>
 
                     <CardActions>
-                        <Row className="show-grid">
-                            <Col xs={4}>
-                                <span><Person style={{ margin: 5 }} /><span>{selectedRecipie.amountFeed}</span></span>
-                            </Col>
-                            <Col xs={4}>
-                                <span><Timer style={{ margin: 5 }} /><span>{selectedRecipie.prepTime}</span></span>
-                            </Col>
-                            <Col xs={4}>
-                                <span><ActionThumbsUpDown style={{ margin: 5 }} /><span>{selectedRecipie.difficulty}</span></span>
-                            </Col>
-                        </Row>
+                        <span style={{alignItems:'left'}}><Person style={{ margin: 5 }} /><span>{selectedRecipie.amountFeed}</span></span>
+                        <span style={{alignItems:'center'}}><Timer style={{ margin: 5 }} /><span>{selectedRecipie.prepTime}</span></span>
+                        <span style={{alignItems:'right'}}><ActionThumbsUpDown style={{ margin: 5 }} /><span>{selectedRecipie.difficulty}</span></span>
                     </CardActions>
                     <CardText>
                         <h3>Description</h3>
@@ -102,49 +91,7 @@ export default class ShowRecipie extends React.Component {
                             })}
                         </span>
                     </CardText>
-
-
                 </Card>
-
-
-
-
-
-
-
-
-
-
-
-
-                <h3>Title: {selectedRecipie.title}</h3>
-
-                <h3>Description: </h3>
-
-                {descriptionArray.map(function (detail, index) {
-                    return <p key={index}>
-                        {detail}
-                    </p>
-                })}
-
-
-                <FloatingActionButton style={style} onClick={() => editRecipie(selectedRecipie)}>
-                    <Edit />
-                </FloatingActionButton>
-
-                <FloatingActionButton style={style} onClick={() => deleteRecipie(selectedRecipie)}>
-                    <Delete />
-                </FloatingActionButton>
-
-
-
-
-
-                <h4>Steps: </h4>
-
-
-
-
             </section>
         );
     }

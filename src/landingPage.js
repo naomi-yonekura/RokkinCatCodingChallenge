@@ -136,16 +136,19 @@ export default class LandingPage extends React.Component {
                     <section>
 
                         <Link to='/' >
-                            <RaisedButton label="Home" primary={true} />
+                            <RaisedButton label="Home" secondary={true} />
                         </Link>
+
+
+
                         <Link to='/addRecipe'>
-                            <RaisedButton label="Add Recipe" secondary={true} />
+                            <RaisedButton label="Add Recipe" primary={true} />
                         </Link>
                         <Link to='/editRecipe'>
                             <RaisedButton label="Edit Recipe" primary={true} />
                         </Link>
                         <Link to='/showRecipe'>
-                            <RaisedButton label="Show Recipe" primary={true} />
+                            <RaisedButton label="Show Recipe" secondary={true} />
                         </Link>
 
 
