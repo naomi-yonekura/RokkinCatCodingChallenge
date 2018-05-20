@@ -61,13 +61,16 @@ export default class ShowRecipie extends React.Component {
                     </CardActions>
                     <CardActions>
 
-                        <FloatingActionButton secondary={true} style={style} onClick={() => editRecipie(selectedRecipie)}>
-                            <Edit />
-                        </FloatingActionButton>
+                        <Link to='/editRecipe'>
+                            <FloatingActionButton secondary={true} style={style} onClick={() => editRecipie(selectedRecipie)}>
+                                <Edit />
+                            </FloatingActionButton>
+                        </Link>
+
                         <Link to='/'>
-                        <FloatingActionButton secondary={true} style={style} onClick={() => deleteRecipie(selectedRecipie)}>
-                            <Delete />
-                        </FloatingActionButton>
+                            <FloatingActionButton secondary={true} style={style} onClick={() => deleteRecipie(selectedRecipie)}>
+                                <Delete />
+                            </FloatingActionButton>
                         </Link>
 
 

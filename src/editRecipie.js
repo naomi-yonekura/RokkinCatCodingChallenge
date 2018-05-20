@@ -5,6 +5,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Remove from 'material-ui/svg-icons/content/remove';
 import Snackbar from 'material-ui/Snackbar';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import { Link } from 'react-router-dom';
 
 
 import {
@@ -25,7 +26,7 @@ export default class EditRecipie extends React.Component {
             key: this.props.editingRecipie.key,
             prepTime: this.props.editingRecipie.prepTime,
             foodType: this.props.editingRecipie.foodType,
-            diffiictuly: this.props.editingRecipie.diffiictuly,
+            difficulty: this.props.editingRecipie.difficulty,
             amountFeed: this.props.editingRecipie.amountFeed,
             description: this.props.editingRecipie.description,
             ingredients: this.props.editingRecipie.ingredients,
@@ -98,11 +99,14 @@ export default class EditRecipie extends React.Component {
     }
 
     submit() {
-        // TODO change submit function 
         if (this.state.title !== "") {
             let recipie = {
                 title: this.state.title,
                 key: this.state.key,
+                prepTime: this.state.prepTime,
+                foodType: this.state.foodType,
+                difficulty: this.state.difficulty,
+                amountFeed: this.state.amountFeed,
                 description: this.state.description,
                 ingredients: this.state.ingredients,
                 steps: this.state.steps,
@@ -147,29 +151,58 @@ export default class EditRecipie extends React.Component {
 
 
                         <TextField floatingLabelText="Title"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
                             onChange={(event, newValue) => this.changeTitle(newValue)}
                             value={this.state.title} />
                         <br />
 
-                        <TextField floatingLabelText="Description" onChange={(event, newValue) => this.changeDescription(newValue)}
+                        <TextField floatingLabelText="Description"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
+                            onChange={(event, newValue) => this.changeDescription(newValue)}
                             multiLine={true} rows={4}
                             value={this.state.description} />
                         <br />
 
-                        <br /><TextField value={this.state.prepTime} floatingLabelText="Prep Time" onChange={(event, newValue) => this.changePrepTime(newValue)} />
-                        <br /><TextField value={this.state.foodType} floatingLabelText="Type of Food" onChange={(event, newValue) => this.changeFoodType(newValue)} />
-                        <br /><TextField value={this.state.diffiictuly} floatingLabelText="Difficulty" onChange={(event, newValue) => this.changeDifficulty(newValue)} />
-                        <br /><TextField value={this.state.amountFeed} floatingLabelText="Amount of People Feed" onChange={(event, newValue) => this.changeAmountFeed(newValue)} />
+                        <br /><TextField value={this.state.prepTime} floatingLabelText="Prep Time"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
+                            onChange={(event, newValue) => this.changePrepTime(newValue)} />
+                        <br /><TextField value={this.state.foodType} floatingLabelText="Type of Food"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
+                            onChange={(event, newValue) => this.changeFoodType(newValue)} />
+                        <br /><TextField value={this.state.difficulty} floatingLabelText="Difficulty"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
+                            onChange={(event, newValue) => this.changeDifficulty(newValue)} />
+                        <br /><TextField value={this.state.amountFeed} floatingLabelText="Amount of People Feed"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
+                            onChange={(event, newValue) => this.changeAmountFeed(newValue)} />
 
                         {this.state.ingredients.map((ingredient, index) => (
                             <div key={index}>
                                 <TextField
                                     floatingLabelText="Ingredient"
+                                    underlineStyle={{ color: '#000000' }}
+                                    floatingLabelStyle={{ color: '#000000' }}
+                                    floatingLabelFocusStyle={{ color: '#000000' }}
                                     value={ingredient.name}
                                     onChange={(event, newValue) => this.changeIngredient(index, newValue)}
                                 />
                                 <TextField
                                     floatingLabelText="Amount"
+                                    underlineStyle={{ color: '#000000' }}
+                                    floatingLabelStyle={{ color: '#000000' }}
+                                    floatingLabelFocusStyle={{ color: '#000000' }}
                                     value={ingredient.amount}
                                     onChange={(event, newValue) => this.changeAmount(index, newValue)}
                                 />
@@ -181,13 +214,20 @@ export default class EditRecipie extends React.Component {
 
 
                         <TextField floatingLabelText="Steps"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
                             multiLine={true} rows={4}
                             onChange={(event, newValue) => this.changeSteps(newValue)}
                             value={this.state.steps} />
 
-                        <RaisedButton style={{ margin: 20, minWidth: 100 }} secondary={true} onClick={() => this.handleAdd()}>Add Ingredient</RaisedButton>
+                        <RaisedButton style={{ margin: 10, minWidth: 100 }} secondary={true} onClick={() => this.handleAdd()}
+                            label="Add Ingredient"></RaisedButton>
+                        <RaisedButton primary={true} onClick={() => this.submit()} label="Save Recipe"></RaisedButton>
 
-                        <RaisedButton primary={true} onClick={() => this.submit()}>Save Changes</RaisedButton>
+                        <Link to='/'>
+                            <RaisedButton style={{ margin: 10 }} secondary={true} label="Return"></RaisedButton>
+                        </Link>
                         <Snackbar
                             open={this.state.open}
                             message="Please enter a title"

@@ -127,7 +127,6 @@ export default class LandingPage extends React.Component {
     }
 
     saveEditedRecipie(recipie) {
-        console.log('saving edited reicpie: ', recipie);
         localStorage.removeItem(recipie.key);
         localStorage.setItem("" + recipie.key, JSON.stringify(recipie));
     }
@@ -138,7 +137,6 @@ export default class LandingPage extends React.Component {
             <Router>
                 <section>
                     <AppBar title="Naomi Yonekura's Online Recipe Book" primary={true}
-                        // titleStyle={{ color: '#000000' }}
                         iconElementLeft={<Cake style={{ width: 40, height: 40, color: '#ffffff' }} />}
                         iconElementRight={
                             <section>
@@ -154,7 +152,7 @@ export default class LandingPage extends React.Component {
 
 
 
-                    <Link to='/' >
+                    {/* <Link to='/' >
                         <RaisedButton label="Home" secondary={true} />
                     </Link>
 
@@ -167,7 +165,7 @@ export default class LandingPage extends React.Component {
                     <Link to='/showRecipe'>
                         <RaisedButton label="Show Recipe" secondary={true} />
                     </Link>
-                    <p>removing above buttons later</p>
+                    <p>removing above buttons later</p> */}
 
                     <Switch>
                         <Route exact={true} path="/" render={() => {

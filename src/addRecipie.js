@@ -88,7 +88,7 @@ export default class AddRecipie extends React.Component {
     }
 
     submit() {
-        if (this.state.title !== "") {
+        if (this.state.title !== "" && this.state.title !== null && this.state.title !== undefined) {
             let recipie = {
                 title: this.state.title,
                 key: this.state.title,
@@ -100,7 +100,6 @@ export default class AddRecipie extends React.Component {
                 ingredients: this.state.ingredients,
                 steps: this.state.steps,
             };
-
             const { newRecipie } = this.props;
             newRecipie(recipie);
         } else {
@@ -110,38 +109,61 @@ export default class AddRecipie extends React.Component {
         }
     }
 
-
-
     render() {
+
         return (
             <section>
                 <Card style={{ width: 700, minWidth: 500, minHeight: '30%', margin: '50 auto' }}>
-
-
-
                     <CardText>
-
-
                         <TextField floatingLabelText="Title"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
                             onChange={(event, newValue) => this.changeTitle(newValue)} />
 
-                        <br /><TextField floatingLabelText="Description" onChange={(event, newValue) => this.changeDescription(newValue)}
+                        <br /><TextField floatingLabelText="Description"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
+                            onChange={(event, newValue) => this.changeDescription(newValue)}
                             multiLine={true} rows={4} />
 
-                        <br /><TextField floatingLabelText="Prep Time" onChange={(event, newValue) => this.changePrepTime(newValue)} />
-                        <br /><TextField floatingLabelText="Type of Food" onChange={(event, newValue) => this.changeFoodType(newValue)} />
-                        <br /><TextField floatingLabelText="Difficulty" onChange={(event, newValue) => this.changeDifficulty(newValue)} />
-                        <br /><TextField floatingLabelText="Amount of People Feed" onChange={(event, newValue) => this.changeAmountFeed(newValue)} />
+                        <br /><TextField floatingLabelText="Prep Time"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
+                            onChange={(event, newValue) => this.changePrepTime(newValue)} />
+                        <br /><TextField floatingLabelText="Type of Food"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
+                            onChange={(event, newValue) => this.changeFoodType(newValue)} />
+                        <br /><TextField floatingLabelText="Difficulty"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
+                            onChange={(event, newValue) => this.changeDifficulty(newValue)} />
+                        <br /><TextField floatingLabelText="Amount of People Feed"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }} onChange={(event, newValue) => this.changeAmountFeed(newValue)} />
+
 
                         {this.state.ingredients.map((ingredient, index) => (
                             <div key={index}>
                                 <TextField
                                     floatingLabelText="Ingredient"
+                                    underlineStyle={{ color: '#000000' }}
+                                    floatingLabelStyle={{ color: '#000000' }}
+                                    floatingLabelFocusStyle={{ color: '#000000' }}
                                     value={ingredient.name}
                                     onChange={(event, newValue) => this.changeIngredient(index, newValue)} />
 
                                 <TextField
                                     floatingLabelText="Amount"
+                                    underlineStyle={{ color: '#000000' }}
+                                    floatingLabelStyle={{ color: '#000000' }}
+                                    floatingLabelFocusStyle={{ color: '#000000' }}
                                     value={ingredient.amount}
                                     onChange={(event, newValue) => this.changeAmount(index, newValue)} />
 
@@ -153,13 +175,18 @@ export default class AddRecipie extends React.Component {
                             </div>
                         ))}
                         <TextField floatingLabelText="Steps"
+                            underlineStyle={{ color: '#000000' }}
+                            floatingLabelStyle={{ color: '#000000' }}
+                            floatingLabelFocusStyle={{ color: '#000000' }}
                             multiLine={true} rows={4}
                             onChange={(event, newValue) => this.changeSteps(newValue)} />
 
-                        <RaisedButton style={{ margin: 20, minWidth: 100 }} secondary={true} onClick={() => this.handleAdd()}>Add Ingredient</RaisedButton>
+                        <RaisedButton style={{ margin: 10, minWidth: 100 }} secondary={true} onClick={() => this.handleAdd()}
+                            label="Add Ingredient"></RaisedButton>
+                        <RaisedButton primary={true} onClick={() => this.submit()} label="Add Recipe"></RaisedButton>
 
                         <Link to='/'>
-                            <RaisedButton style={{}} primary={true} onClick={() => this.submit()}>Add Recipe</RaisedButton>
+                            <RaisedButton style={{ margin: 10 }} secondary={true} label="Return"></RaisedButton>
                         </Link>
                         <Snackbar
                             open={this.state.open}
